@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>당당폰 | 제휴카드 없이 상담신청</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+html,body{margin:0;background:#eef1f5;font-family:'Pretendard',-apple-system,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;-webkit-text-size-adjust:100%}
+*{box-sizing:border-box}button{font-family:inherit;cursor:pointer}input,textarea,select{font-family:inherit}
+a{color:#1a5cff;text-decoration:none}a:hover{color:#0a3fd0}
+@keyframes ddRipple{0%{transform:scale(1);opacity:.5}100%{transform:scale(1.45);opacity:0}}
+@keyframes ddGlow{0%,100%{box-shadow:0 0 6px 0 rgba(26,92,255,.25)}50%{box-shadow:0 0 26px 7px rgba(26,92,255,.7)}}
+@keyframes ddFloat{0%,100%{transform:scale(1)}20%{transform:scale(1.025)}40%{transform:scale(1)}}
+@keyframes ddBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@keyframes ddArrow{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+@keyframes ddSpin{to{transform:rotate(360deg)}}
+@keyframes ddPop{from{transform:scale(.92);opacity:0}to{transform:scale(1);opacity:1}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</helmet>
+
+<sc-if value="{{ showSplash }}" hint-placeholder-val="{{ true }}">
+<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#fff"><div style="width:34px;height:34px;border:4px solid #dbe6ff;border-top-color:#1a5cff;border-radius:50%;animation:ddSpin .8s linear infinite"></div></div>
+</sc-if>
+
+<sc-if value="{{ showUser }}" hint-placeholder-val="{{ true }}">
+<div style="max-width:430px;margin:0 auto;background:#fff;min-height:100vh;position:relative;overflow-x:hidden;padding-bottom:110px;color:#1c1c1c">
+<div style="background:linear-gradient(#fff 48px,#d9eeff 48px,#fff 833px)">
+ <div style="height:48px;background:#000;display:flex;align-items:center;justify-content:center"><div style="width:99.2px;height:29.6px;background:url(assets/logo.png) center/contain no-repeat;filter:brightness(0) invert(1)"></div></div>
+ <div style="position:relative;height:34px;background:#ff1f1f;overflow:hidden;color:#fff"><div style="position:absolute;left:20px;top:50%;margin-top:-24px;width:48px;height:48px;background:url(assets/timer-icon.png) center/contain no-repeat"></div><span style="position:absolute;left:76px;top:0;height:34px;display:flex;align-items:center;font-size:16px;font-weight:800;line-height:1;white-space:nowrap;transform:skewX(2.9deg)">일단 신청부터! 타임특가</span><div style="position:absolute;left:274px;top:50%;margin-top:-12px;width:126px;height:24px;border-radius:3.4px;color:#fff;display:flex;align-items:center;justify-content:center"><span id="dd-timer" style="font-size:17px;font-weight:800;line-height:1;font-variant-numeric:tabular-nums;letter-spacing:.02em">00:05:00:00</span></div></div>
+ <div style="position:relative;height:543.4px">
+  <div style="position:absolute;left:0;right:0;top:34.1px;text-align:center;font-size:22.34px;line-height:22.34px;font-weight:600;color:#1c1c1c">제휴카드 없이 저렴하게</div>
+  <div style="position:absolute;left:0;right:0;top:74.19999999999999px;text-align:center;font-size:43.43px;line-height:54px;font-weight:800;color:#1c1c1c"><span style="color:#0049ff">휴대폰</span>이 무료<br>지금만 가능해요</div>
+  <div style="position:absolute;left:37px;top:216.9px;font-size:16.33px;line-height:16.33px;font-weight:500;color:#545454">*내 혜택이 궁금하다면? 번호만 남겨주세요!</div>
+  <div style="position:absolute;left:34.67px;right:34.67px;top:246.70000000000002px"><div style="position:relative;height:55.3px;background:#fff;border:1px solid #c4c4c4;border-radius:8.6px"><input value="{{ name }}" onChange="{{ onName }}" maxlength="20" style="position:absolute;inset:0;width:100%;height:100%;border:0;outline:none;background:transparent;font-size:18.9px;font-weight:500;color:#1c1c1c;padding:0 0 0 23.3px;font-family:inherit;border-radius:8.6px"><sc-if value="{{ nameEmpty }}" hint-placeholder-val="{{ true }}"><span style="position:absolute;left:23.3px;top:0;height:55.3px;line-height:55.3px;font-size:18.9px;font-weight:500;color:#a0a0a0;pointer-events:none">{{ ph }}</span></sc-if></div></div>
+  <div style="position:absolute;left:34.67px;right:34.67px;top:312.09999999999997px"><div style="position:relative;height:55.3px;background:#fff;border:1px solid #c4c4c4;border-radius:8.6px">
+<input id="h-p1" value="{{ p1 }}" onChange="{{ onP1 }}" inputmode="numeric" maxlength="3" style="position:absolute;left:7.63%;top:0;width:16%;height:55.3px;border:0;outline:none;background:transparent;font-size:18.9px;font-weight:500;color:#1c1c1c;padding:0;font-family:inherit">
+<span style="position:absolute;left:27.2%;top:0;height:55.3px;line-height:55.3px;font-size:18.9px;font-weight:500;color:#a0a0a0">-</span>
+<input id="h-p2" value="{{ p2 }}" onChange="{{ onP2h }}" inputmode="numeric" maxlength="4" style="position:absolute;left:40.3%;top:0;width:20%;height:55.3px;border:0;outline:none;background:transparent;font-size:18.9px;font-weight:500;color:#1c1c1c;padding:0;font-family:inherit">
+<sc-if value="{{ p2Empty }}" hint-placeholder-val="{{ true }}"><span style="position:absolute;left:40.3%;;top:0;height:55.3px;line-height:55.3px;font-size:18.9px;font-weight:500;color:#a0a0a0;pointer-events:none">0000</span></sc-if>
+<span style="position:absolute;left:63.6%;top:0;height:55.3px;line-height:55.3px;font-size:18.9px;font-weight:500;color:#a0a0a0">-</span>
+<input id="h-p3" value="{{ p3 }}" onChange="{{ onP3 }}" inputmode="numeric" maxlength="4" style="position:absolute;left:75.8%;top:0;width:20%;height:55.3px;border:0;outline:none;background:transparent;font-size:18.9px;font-weight:500;color:#1c1c1c;padding:0;font-family:inherit">
+<sc-if value="{{ p3Empty }}" hint-placeholder-val="{{ true }}"><span style="position:absolute;left:75.8%;;top:0;height:55.3px;line-height:55.3px;font-size:18.9px;font-weight:500;color:#a0a0a0;pointer-events:none">0000</span></sc-if></div></div>
+  <div style="position:absolute;left:37px;top:375.7px"><div style="display:flex;align-items:center;gap:5px;font-size:12.73px;font-weight:500;color:#4f4f4f;line-height:13.7px"><span onClick="{{ toggleConsent }}" style="width:13.7px;height:13.7px;border-radius:3px;flex:none;cursor:pointer;display:flex;align-items:center;justify-content:center;{{ cbStyle }}">{{ cbMark }}</span><span>(필수) <a href="#" onClick="{{ openPrivacy }}" style="color:#0049ff;text-decoration:underline">개인정보 수집 이용</a>에 동의합니다</span></div></div>
+  <div style="position:absolute;left:34.67px;right:34.67px;top:410.4px;height:50px"><span style="position:absolute;inset:0;border-radius:8.2px;background:rgba(0,73,255,.4);animation:ddRipple 2.6s ease-out infinite;pointer-events:none"></span><span style="position:absolute;inset:0;border-radius:8.2px;background:rgba(0,73,255,.3);animation:ddRipple 2.6s ease-out 1.3s infinite;pointer-events:none"></span><span style="position:absolute;inset:0;border-radius:8.2px;animation:ddGlow 2.2s ease-in-out infinite;pointer-events:none"></span><button onClick="{{ submitHero }}" style="position:relative;width:100%;height:50px;border:0;border-radius:8.2px;background:#0049ff;color:#fff;font-size:20.33px;font-weight:700;line-height:1">상담 신청하기</button></div>
+  <div style="position:absolute;left:0;right:0;top:473.6px;display:flex;flex-direction:column;align-items:center;animation:ddArrow 1.6s ease-in-out infinite"><span style="font-size:12.33px;line-height:12.33px;font-weight:700;color:#0049ff">아래에서 직접 조건을 선택할 수 있어요</span><span style="margin-top:6.4px;display:block;opacity:.55"><svg width="17.3" height="9.3" viewBox="0 0 17.3 9.3" style="display:block"><polyline points="1.2,1.2 8.65,8 16.1,1.2" fill="none" stroke="#0049ff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></polyline></svg></span><span style="margin-top:-1px;display:block"><svg width="17.3" height="9.3" viewBox="0 0 17.3 9.3" style="display:block"><polyline points="1.2,1.2 8.65,8 16.1,1.2" fill="none" stroke="#0049ff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></polyline></svg></span></div>
+ </div>
+ <div id="opts" style="padding:0 34.67px 28.7px">
+<div style="display:flex;align-items:baseline;gap:4px;margin:0px 0 12px;line-height:15.68px"><span style="font-size:15.68px;font-weight:700;color:#1c1c1c;line-height:15.68px">휴대폰 기종</span><span style="font-size:12px;font-weight:500;color:#0049ff;line-height:12px">{{ b.modelNote }}</span></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:9.67px"><sc-for list="{{ models }}" as="o" hint-placeholder-count="2"><button onClick="{{ o.click }}" style="height:34.67px;border-radius:8px;padding:0;display:flex;align-items:center;justify-content:center;gap:4px;cursor:pointer;{{ o.bs }}"><span style="font-size:15.68px;font-weight:700;line-height:1;white-space:nowrap;color:{{ o.c }}">{{ o.label }}</span><sc-if value="{{ o.hasBadge }}" hint-placeholder-val="{{ false }}"><span style="background:#0049ff;color:#fff;font-size:8.67px;font-weight:700;line-height:14.7px;height:14.7px;padding:0 6px;border-radius:7.35px">특가</span></sc-if></button></sc-for></div>
+<div style="display:flex;align-items:baseline;gap:4px;margin:16.5px 0 9px;line-height:15.68px"><span style="font-size:15.68px;font-weight:700;color:#1c1c1c;line-height:15.68px">통신사 선택</span></div>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6.33px"><sc-for list="{{ carriers }}" as="o" hint-placeholder-count="3"><button onClick="{{ o.click }}" style="height:38px;border-radius:8px;padding:0;display:flex;align-items:center;justify-content:center;cursor:pointer;{{ o.bs }}"><span style="{{ o.ls }}"></span><span style="font-size:15.68px;font-weight:700;line-height:1;color:{{ o.c }}">{{ o.label }}</span></button></sc-for></div>
+<div style="display:flex;align-items:baseline;gap:4px;margin:16.5px 0 9px;line-height:15.68px"><span style="font-size:15.68px;font-weight:700;color:#1c1c1c;line-height:15.68px">요금제</span><span style="font-size:12px;font-weight:500;color:#0049ff;line-height:12px">{{ b.planNote }}</span></div>
+<div style="height:38px;border-radius:8px;display:flex;align-items:center;padding:0 10.7px 0 18.7px;background:#e1edff;border:1.5px solid #226cff"><span style="{{ planLs }}"></span><span style="font-size:15.68px;font-weight:700;line-height:1;color:#0049ff;margin-left:10px">{{ planLabel }}</span><span style="font-size:15.68px;font-weight:600;line-height:1;color:#0049ff;margin-left:16px;white-space:nowrap">{{ planName }}</span><span style="margin-left:auto;background:#0049ff;color:#fff;font-size:8.67px;font-weight:700;line-height:14.7px;height:14.7px;padding:0 6px;border-radius:7.35px">필수</span></div>
+<div style="display:flex;align-items:baseline;gap:4px;margin:18.5px 0 13.3px;line-height:15.68px"><span style="font-size:15.68px;font-weight:700;color:#1c1c1c;line-height:15.68px">인터넷 속도</span><span style="font-size:12px;font-weight:500;color:#0049ff;line-height:12px">{{ b.netNote }}</span></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:9.67px"><sc-for list="{{ nets }}" as="o" hint-placeholder-count="2"><button onClick="{{ o.click }}" style="position:relative;height:57.33px;border-radius:8px;padding:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7.3px;cursor:pointer;{{ o.bs }}"><sc-if value="{{ o.hasTag }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;top:-7.3px;left:50%;transform:translateX(-50%);background:#0049ff;color:#fff;font-size:8.67px;font-weight:700;line-height:15px;height:15px;width:50.7px;border-radius:7.5px;text-align:center">가성비 인기</span></sc-if><span style="font-size:15.68px;font-weight:700;line-height:1;color:{{ o.c }}">{{ o.label }}</span><span style="font-size:11.82px;font-weight:600;line-height:1;color:{{ o.sc }}">{{ o.sub }}</span></button></sc-for></div></div>
+</div>
+<div style="background:#0049ff;height:31.7px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:13.67px;font-weight:700">당당폰은 제휴카드 조건 없는 진짜가격!</div>
+<div style="position:relative;height:339.6px;text-align:center"><div style="position:absolute;left:0;right:0;top:32px;font-size:27.37px;line-height:38.7px;font-weight:700;color:#1c1c1c">무엇이든 물어보세요<br>저희가 친절히 답해드려요</div><div style="position:absolute;left:50%;margin-left:-93.3px;top:108.6px;width:186.7px;height:226.7px;background:url(assets/emoji.png) center/100% 100% no-repeat"></div></div>
+<div style="background:#f8fbff;padding:28.3px 0 32px">
+ <div style="text-align:center;font-size:13.78px;line-height:13.78px;font-weight:700;color:#0049ff">REAL REVIEWS</div>
+ <div style="text-align:center;margin-top:14.5px;font-size:19.33px;line-height:19.33px;font-weight:700;color:#1c1c1c">실제 가입 고객님들의 <span style="color:#0049ff">생생한 후기</span></div>
+ <div style="text-align:center;margin-top:12.4px;font-size:14.12px;line-height:21px;font-weight:400;color:#757575">정확한 상담 약속한 혜택그대로<br>그것이 우리의 방식</div>
+ <div style="margin-top:15.1px;overflow:hidden" onTouchStart="{{ tStart }}" onTouchEnd="{{ tEnd }}"><div style="{{ trackStyle }}">
+  <sc-for list="{{ revSlides }}" as="r" hint-placeholder-count="3"><div style="flex:0 0 190.3px;height:228.3px;background:#fff;border:1px solid #d0d1d3;border-radius:10px;overflow:hidden;box-sizing:border-box;position:relative"><div style="{{ r.imgStyle }}">{{ r.imgText }}</div>
+   <div style="position:absolute;left:13.3px;top:115.3px;font-size:12px;line-height:14px;color:#ffc107;letter-spacing:.5px">{{ r.stars }}</div>
+   <div style="position:absolute;right:11.7px;top:117px;font-size:10px;line-height:12px;color:#757575">{{ r.date }}</div>
+   <div style="position:absolute;left:13.3px;right:8px;top:139.8px;height:48px;font-size:9.09px;line-height:12px;color:#757575;white-space:pre-line;overflow:hidden">{{ r.text }}</div>
+   <div style="position:absolute;left:13.3px;top:196px;height:22px;display:flex;align-items:center;gap:4.7px"><span style="{{ r.av }}">{{ r.initial }}</span><span style="font-size:10.1px;font-weight:500;color:#1c1c1c;line-height:1">{{ r.name }}</span></div>
+  </div></sc-for></div></div>
+ <div style="text-align:center;margin-top:37.3px;font-size:13.78px;line-height:13.78px;font-weight:700;color:#0049ff">QnA</div>
+ <div style="text-align:center;margin-top:9.8px;font-size:19.33px;line-height:19.33px;font-weight:700;color:#1c1c1c">자주 묻는 질문</div>
+ <div style="margin:15.8px 20px 0"><sc-for list="{{ faqList }}" as="f" hint-placeholder-count="5"><div style="background:#fff;border:1px solid #d0d1d3;border-radius:8px;margin-bottom:7.5px;overflow:hidden"><div onClick="{{ f.toggle }}" style="height:50.3px;display:flex;align-items:center;cursor:pointer;padding:0 18.7px 0 12.5px"><span style="width:21px;height:21px;border-radius:50%;background:#e6efff;color:#0055ff;font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;flex:none">Q</span><span style="flex:1;margin-left:11px;font-size:13.78px;font-weight:700;color:#1c1c1c;line-height:1.2">{{ f.q }}</span><span style="{{ f.arrow }}"><svg width="11" height="6" viewBox="0 0 17.3 9.3" style="display:block"><polyline points="1.2,1.2 8.65,8 16.1,1.2" fill="none" stroke="#8c8c8c" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></polyline></svg></span></div><sc-if value="{{ f.open }}" hint-placeholder-val="{{ false }}"><div style="padding:0 18px 16px 44px;font-size:12.5px;line-height:1.6;color:#555;white-space:pre-line">{{ f.a }}</div></sc-if></div></sc-for></div>
+</div>
+<sc-if value="{{ hasDetail }}" hint-placeholder-val="{{ false }}"><sc-for list="{{ detailImgs }}" as="d" hint-placeholder-count="0"><div style="{{ d.bg }}"></div></sc-for></sc-if>
+<div style="position:relative;height:232.3px;background:#fff">
+ <div style="position:absolute;left:16.3px;top:40.7px;width:147px;height:41px;background:url(assets/logo.png) left center/contain no-repeat"></div>
+ <div style="position:absolute;left:178px;top:47.7px;font-size:12.94px;line-height:12.94px;font-weight:800;color:#030303;white-space:nowrap">당당하고 투명하게 개통하는게 철칙</div>
+ <div style="position:absolute;left:178px;top:64.5px;font-size:12.94px;line-height:12.94px;font-weight:600;color:#333;white-space:nowrap">숨은 혜택까지 꼼꼼하게</div>
+ <div style="position:absolute;left:19.3px;top:103px;font-size:11.36px;line-height:11.36px;font-weight:600;color:#707070">이용약관</div>
+ <a href="#" onClick="{{ openPrivacy }}" style="position:absolute;left:74.7px;top:103px;font-size:11.36px;line-height:11.36px;font-weight:600;color:#707070">개인정보처리방침</a>
+ <div style="position:absolute;left:19.3px;right:60px;top:128.2px;font-size:9.87px;line-height:14.07px;font-weight:400;color:#a5a5a5">{{ f.company }} ㅣ 대표이사 : {{ f.ceo }} ㅣ 사업자등록번호 : {{ f.bizNo }}<br>사업장 주소지 : {{ f.addr }}<br>통신판매업신고번호: {{ f.reportNo }}<br>대표번호 : {{ f.tel }}</div>
+ <div style="position:absolute;left:19.3px;top:205.9px;font-size:9.67px;line-height:9.67px;font-weight:400;color:#adadad">Copyright 2026. {{ f.rights }} 모든권리 보유</div>
+ <div onClick="{{ openPre }}" style="position:absolute;left:312px;top:178px;width:43.7px;height:43.3px;background:url(assets/badge.png) center/contain no-repeat;cursor:pointer"></div>
+</div>
+
+<div style="position:fixed;left:0;right:0;bottom:0;z-index:50;pointer-events:none"><div style="max-width:430px;margin:0 auto;pointer-events:auto;position:relative;padding:0 12px calc(14px + env(safe-area-inset-bottom))">
+ <sc-if value="{{ showConsentBar }}" hint-placeholder-val="{{ false }}"><div style="margin:0 10px 8px;background:#fff;border:1px solid #dfe3e9;border-radius:12px;padding:12px 14px;display:flex;align-items:center;gap:10px;box-shadow:0 4px 18px rgba(0,0,0,.15);font-size:12px;line-height:1.4"><span style="flex:1">맞춤 광고와 통계 분석을 위해 쿠키를 사용합니다.</span><button onClick="{{ consentNo }}" style="border:1px solid #ccd;background:#fff;border-radius:8px;padding:8px 10px;font-size:12px">거부</button><button onClick="{{ consentYes }}" style="border:0;background:#0049ff;color:#fff;border-radius:8px;padding:8px 12px;font-size:12px;font-weight:700">동의</button></div></sc-if>
+ <div style="background:#222;border-radius:18px;padding:8px 10px;position:relative;box-shadow:0 8px 24px rgba(0,0,0,.35);animation:ddFloat 2.1s ease-in-out infinite">
+  <div style="position:absolute;top:-25px;left:62.4%;margin-left:-74px;height:33.3px;padding:0 16px;display:flex;align-items:center;background:#fff;border-radius:16.5px;color:#0a4cff;font-size:15px;font-weight:700;white-space:nowrap;filter:drop-shadow(0 2px 4px rgba(0,0,0,.25));z-index:2"><span style="line-height:1">{{ b.bubble }}</span><span style="position:absolute;bottom:-4.5px;left:50%;margin-left:-5.25px;width:10.5px;height:10.5px;background:#fff;transform:rotate(45deg)"></span></div>
+  <div style="height:38.7px;border-radius:8px;background:#383838;border:1px solid #555;box-sizing:border-box;padding:0 10.8px 0 17.5px;display:flex;align-items:center;justify-content:space-between;color:#fff"><span style="font-size:16.2px;font-weight:700;line-height:1">{{ b.floatModel }}</span><span style="display:flex;align-items:center;gap:8px"><span style="font-size:16.3px;font-weight:700;line-height:1;text-shadow:0 0 8px rgba(255,255,255,.45)">{{ b.floatPrice }}</span><span style="background:#0a4cff;font-size:7.2px;font-weight:700;border-radius:4px;height:14.9px;line-height:14.9px;padding:0 4px;white-space:nowrap">{{ b.benefit }}</span></span></div>
+  <button onClick="{{ openModal }}" style="margin-top:7.3px;width:100%;height:38.8px;border:0;border-radius:8px;background:#0049ff;color:#fff;font-size:15px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:1px;padding:0"><span style="width:29.7px;height:26.2px;background:url(assets/bell.png) center/contain no-repeat;display:block"></span><span style="line-height:1">{{ b.btnText }}</span></button>
+ </div>
+</div></div>
+
+<sc-if value="{{ modal }}" hint-placeholder-val="{{ false }}">
+<div onClick="{{ closeModal }}" style="position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:100;display:flex;align-items:center;justify-content:center;padding:12px 0">
+ <div onClick="{{ stop }}" style="width:calc(100% - 41.2px);max-width:380px;max-height:100%;overflow-y:auto;background:#fff;border-radius:27.7px;animation:ddPop .2s ease-out;position:relative">
+  <div style="position:relative;height:72.9px"><div style="position:absolute;left:27px;top:21px;font-size:19px;line-height:19px;font-weight:750;color:#1c1c1c">제휴카드 없이 신청해보세요</div><div onClick="{{ closeModal }}" style="position:absolute;right:23px;top:22px;font-size:16px;line-height:16px;font-weight:700;cursor:pointer;color:#1c1c1c">x</div></div>
+  <div style="padding:0 24.7px 0 25px">
+<div style="display:flex;align-items:baseline;gap:4px;margin:0px 0 11.4px;line-height:14px"><span style="font-size:14px;font-weight:700;color:#1c1c1c;line-height:14px">휴대폰 기종</span><span style="font-size:11px;font-weight:500;color:#0049ff;line-height:11px">{{ b.modelNote }}</span></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8.9px"><sc-for list="{{ models }}" as="o" hint-placeholder-count="2"><button onClick="{{ o.click }}" style="height:32.4px;border-radius:8px;padding:0;display:flex;align-items:center;justify-content:center;gap:4px;cursor:pointer;{{ o.bs }}"><span style="font-size:14px;font-weight:700;line-height:1;white-space:nowrap;color:{{ o.c }}">{{ o.label }}</span><sc-if value="{{ o.hasBadge }}" hint-placeholder-val="{{ false }}"><span style="background:#0049ff;color:#fff;font-size:8.4px;font-weight:700;line-height:12.6px;height:12.6px;padding:0 5px;border-radius:6.3px">특가</span></sc-if></button></sc-for></div>
+<div style="display:flex;align-items:baseline;gap:4px;margin:14.9px 0 9.5px;line-height:14px"><span style="font-size:14px;font-weight:700;color:#1c1c1c;line-height:14px">통신사 선택</span></div>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:5.8px"><sc-for list="{{ carriers }}" as="o" hint-placeholder-count="3"><button onClick="{{ o.click }}" style="height:35.7px;border-radius:8px;padding:0;display:flex;align-items:center;justify-content:center;cursor:pointer;{{ o.bs }}"><span style="{{ o.ls }}"></span><span style="font-size:14px;font-weight:700;line-height:1;color:{{ o.c }}">{{ o.label }}</span></button></sc-for></div>
+<div style="display:flex;align-items:baseline;gap:4px;margin:15.8px 0 9.5px;line-height:14px"><span style="font-size:14px;font-weight:700;color:#1c1c1c;line-height:14px">요금제</span><span style="font-size:11px;font-weight:500;color:#0049ff;line-height:11px">{{ b.planNote }}</span></div>
+<div style="height:35.7px;border-radius:8px;display:flex;align-items:center;padding:0 9px 0 15.5px;background:#e1edff;border:1.5px solid #226cff"><span style="{{ planLs }}"></span><span style="font-size:14px;font-weight:700;line-height:1;color:#0049ff;margin-left:8px">{{ planLabel }}</span><span style="font-size:14px;font-weight:600;line-height:1;color:#0049ff;margin-left:13px;white-space:nowrap">{{ planName }}</span><span style="margin-left:auto;background:#0049ff;color:#fff;font-size:8.4px;font-weight:700;line-height:12.6px;height:12.6px;padding:0 5px;border-radius:6.3px">필수</span></div>
+<div style="display:flex;align-items:baseline;gap:4px;margin:19.5px 0 12.5px;line-height:14px"><span style="font-size:14px;font-weight:700;color:#1c1c1c;line-height:14px">인터넷 속도</span><span style="font-size:11px;font-weight:500;color:#0049ff;line-height:11px">{{ b.netNote }}</span></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8.9px"><sc-for list="{{ nets }}" as="o" hint-placeholder-count="2"><button onClick="{{ o.click }}" style="position:relative;height:53.3px;border-radius:8px;padding:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6.6px;cursor:pointer;{{ o.bs }}"><sc-if value="{{ o.hasTag }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;top:-6.8px;left:50%;transform:translateX(-50%);background:#0049ff;color:#fff;font-size:8.4px;font-weight:700;line-height:13.6px;height:13.6px;width:46px;border-radius:6.8px;text-align:center">가성비 인기</span></sc-if><span style="font-size:14px;font-weight:700;line-height:1;color:{{ o.c }}">{{ o.label }}</span><span style="font-size:10.8px;font-weight:600;line-height:1;color:{{ o.sc }}">{{ o.sub }}</span></button></sc-for></div></div>
+  <div style="margin-top:23px;background:#0049ff;height:32.3px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:13.5px;font-weight:700">당당폰은 제휴카드 조건 없는 진짜 가격!</div>
+  <div style="background:#f7faff;padding:17.6px 25px 28px;border-radius:0 0 27.7px 27.7px">
+   <div style="position:relative;height:33.3px;background:#fff;border:1px solid #c4c4c4;border-radius:8.6px"><input value="{{ name }}" onChange="{{ onName }}" maxlength="20" style="position:absolute;inset:0;width:100%;height:100%;border:0;outline:none;background:transparent;font-size:15.5px;font-weight:500;color:#1c1c1c;padding:0 0 0 20px;font-family:inherit;border-radius:8.6px"><sc-if value="{{ nameEmpty }}" hint-placeholder-val="{{ true }}"><span style="position:absolute;left:20px;top:0;height:33.3px;line-height:33.3px;font-size:15.5px;font-weight:500;color:#a0a0a0;pointer-events:none">{{ ph }}</span></sc-if></div>
+   <div style="margin-top:7.7px"><div style="position:relative;height:33.3px;background:#fff;border:1px solid #c4c4c4;border-radius:8.6px">
+<input id="m-p1" value="{{ p1 }}" onChange="{{ onP1 }}" inputmode="numeric" maxlength="3" style="position:absolute;left:7.63%;top:0;width:16%;height:33.3px;border:0;outline:none;background:transparent;font-size:15.5px;font-weight:500;color:#1c1c1c;padding:0;font-family:inherit">
+<span style="position:absolute;left:27.2%;top:0;height:33.3px;line-height:33.3px;font-size:15.5px;font-weight:500;color:#a0a0a0">-</span>
+<input id="m-p2" value="{{ p2 }}" onChange="{{ onP2m }}" inputmode="numeric" maxlength="4" style="position:absolute;left:40.3%;top:0;width:20%;height:33.3px;border:0;outline:none;background:transparent;font-size:15.5px;font-weight:500;color:#1c1c1c;padding:0;font-family:inherit">
+<sc-if value="{{ p2Empty }}" hint-placeholder-val="{{ true }}"><span style="position:absolute;left:40.3%;;top:0;height:33.3px;line-height:33.3px;font-size:15.5px;font-weight:500;color:#a0a0a0;pointer-events:none">0000</span></sc-if>
+<span style="position:absolute;left:63.6%;top:0;height:33.3px;line-height:33.3px;font-size:15.5px;font-weight:500;color:#a0a0a0">-</span>
+<input id="m-p3" value="{{ p3 }}" onChange="{{ onP3 }}" inputmode="numeric" maxlength="4" style="position:absolute;left:75.8%;top:0;width:20%;height:33.3px;border:0;outline:none;background:transparent;font-size:15.5px;font-weight:500;color:#1c1c1c;padding:0;font-family:inherit">
+<sc-if value="{{ p3Empty }}" hint-placeholder-val="{{ true }}"><span style="position:absolute;left:75.8%;;top:0;height:33.3px;line-height:33.3px;font-size:15.5px;font-weight:500;color:#a0a0a0;pointer-events:none">0000</span></sc-if></div></div>
+   <div style="margin-top:14px"><div style="display:flex;align-items:center;gap:5px;font-size:12px;font-weight:500;color:#4f4f4f;line-height:13px"><span onClick="{{ toggleConsent }}" style="width:13px;height:13px;border-radius:3px;flex:none;cursor:pointer;display:flex;align-items:center;justify-content:center;{{ cbStyle }}">{{ cbMark }}</span><span>(필수) <a href="#" onClick="{{ openPrivacy }}" style="color:#0049ff;text-decoration:underline">개인정보 수집 이용</a>에 동의합니다</span></div></div>
+   <div style="position:relative;margin-top:14.5px;height:46px"><span style="position:absolute;inset:0;border-radius:9px;background:rgba(0,73,255,.4);animation:ddRipple 2.6s ease-out infinite;pointer-events:none"></span><span style="position:absolute;inset:0;border-radius:9px;background:rgba(0,73,255,.3);animation:ddRipple 2.6s ease-out 1.3s infinite;pointer-events:none"></span><span style="position:absolute;inset:0;border-radius:9px;animation:ddGlow 2.2s ease-in-out infinite;pointer-events:none"></span><button onClick="{{ submitModal }}" style="position:relative;width:100%;height:46px;border:0;border-radius:9px;background:#0049ff;color:#fff;font-size:19.4px;font-weight:700;line-height:1">간편 상담 신청</button></div>
+  </div>
+ </div>
+</div>
+</sc-if>
+<sc-if value="{{ toast }}" hint-placeholder-val="{{ false }}"><div style="position:fixed;left:50%;top:80px;transform:translateX(-50%);z-index:300;background:#222;color:#fff;font-size:14px;padding:12px 20px;border-radius:24px;white-space:nowrap;box-shadow:0 4px 16px rgba(0,0,0,.3)">{{ toast }}</div></sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{ showAdminLogin }}" hint-placeholder-val="{{ false }}">
+<div style="min-height:100vh;background:linear-gradient(#d8eeff,#fff);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:13px;padding-bottom:40px">
+  <div style="margin-bottom:39px"><img src="assets/logo.png" alt="당당폰" style="height:107px;display:block"></div>
+  <input value="{{ loginId }}" onChange="{{ onLoginId }}" placeholder="아이디를 입력해 주세요" style="width:475px;max-width:90vw;height:72px;border:0;border-radius:36px;padding:0 47px;font-size:17.6px;outline:none;box-sizing:border-box">
+  <input type="password" value="{{ loginPw }}" onChange="{{ onLoginPw }}" onKeyDown="{{ loginKey }}" placeholder="비밀번호를 입력해 주세요" style="width:475px;max-width:90vw;height:72px;border:0;border-radius:36px;padding:0 47px;font-size:17.6px;outline:none;box-sizing:border-box">
+  <button onClick="{{ doLogin }}" style="width:475px;max-width:90vw;height:71px;border:0;border-radius:36px;background:#000;color:#fff;font-size:20.8px;font-weight:700;margin-top:14px">관리자 로그인</button>
+  <div style="color:#e0245e;font-size:11.2px;height:18px">{{ loginErr }}</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ showAdmin }}" hint-placeholder-val="{{ false }}">
+<div style="min-width:1200px;height:100vh;box-sizing:border-box;background:linear-gradient(#d8eeff,#fff);padding:28px 42px">
+ <div style="display:flex;height:100%;background:linear-gradient(#eef7ff,#fff);border-radius:56px;box-shadow:0 10px 40px rgba(60,120,200,.15);overflow:hidden">
+  <div style="width:250px;flex:none;padding:40px 17px 0;box-sizing:border-box">
+    <div style="display:flex;justify-content:center;margin-bottom:41px"><img src="assets/logo.png" alt="당당폰" style="height:35px;display:block"></div>
+    <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="7"><div onClick="{{ t.click }}" style="{{ t.style }}">{{ t.label }}</div></sc-for>
+    <div onClick="{{ logout }}" style="margin-top:10px;padding:10px 21px;font-size:13px;color:#8a919c;cursor:pointer">로그아웃</div>
+  </div>
+  <div style="flex:1;min-width:0;height:100%;box-sizing:border-box;overflow-y:auto;background:#fff;border-radius:47px 0 0 47px;padding:42px 31px 40px 50px;box-shadow:-4px 0 20px rgba(60,120,200,.06)">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:45px;min-height:31px">
+      <div style="display:flex;align-items:baseline;gap:14px"><span style="font-size:25px;font-weight:800;letter-spacing:-.5px;color:#1c1c1c;line-height:1">{{ tabTitle }}</span><span style="font-size:11.5px;color:#777">{{ tabHint }}</span></div>
+      <div style="display:flex;gap:10px;align-items:center">
+        <sc-if value="{{ demoMode }}" hint-placeholder-val="{{ false }}"><span style="font-size:10px;color:#c25800;background:#fff2e0;border-radius:12px;padding:6px 12px">Firebase 미연결 · 데모 저장소(브라우저)</span></sc-if>
+        <sc-if value="{{ tabLeads }}" hint-placeholder-val="{{ false }}"><button onClick="{{ downloadXlsx }}" style="height:31px;border:0;border-radius:16px;background:#07d300;color:#fff;font-size:13px;font-weight:600;padding:0 16px;cursor:pointer;font-family:inherit">엑셀 다운로드</button></sc-if>
+        <sc-if value="{{ canSave }}" hint-placeholder-val="{{ true }}"><button onClick="{{ save }}" style="height:31px;width:87px;border:0;border-radius:16px;background:#1e1e22;color:#fff;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit">저장하기</button></sc-if>
+      </div>
+    </div>
+
+    <sc-if value="{{ tabBasic }}" hint-placeholder-val="{{ true }}">
+    <div style="display:grid;gap:21px;justify-items:start">
+      <div style="display:flex;gap:28px"><div style="width:190px;flex:none"><div style="font-size:17.8px;font-weight:600;line-height:22px;color:#1c1c1c;margin-bottom:8px">휴대폰 기종</div><input value="{{ b.model }}" onChange="{{ on.model }}" style="{{ inp }}"></div><div style="width:327px;flex:none"><div style="font-size:17.8px;font-weight:600;line-height:22px;color:#1c1c1c;margin-bottom:8px">보조 문구</div><input value="{{ b.modelNote }}" onChange="{{ on.modelNote }}" style="{{ inp }}"></div></div>
+      <div style="display:flex;gap:18px"><div style="width:200px;flex:none"><div style="font-size:17.8px;font-weight:600;line-height:22px;color:#1c1c1c;margin-bottom:8px">초입 화면 통신사</div><div style="display:flex;gap:8px;height:38px;align-items:center"><sc-for list="{{ carrierRadios }}" as="c" hint-placeholder-count="3"><div onClick="{{ c.click }}" style="display:flex;align-items:center;gap:4px;font-size:16px;cursor:pointer;white-space:nowrap"><i style="{{ c.dot }}"></i>{{ c.label }}</div></sc-for></div></div><div style="width:327px;flex:none"><div style="font-size:17.8px;font-weight:600;line-height:22px;color:#1c1c1c;margin-bottom:8px">보조 문구</div><input value="{{ b.planNote }}" onChange="{{ on.planNote }}" style="{{ inp }}"></div></div>
+      <div><div style="font-size:17.8px;font-weight:600;line-height:22px;color:#1c1c1c;margin-bottom:8px">대표 요금제 설정</div><div style="display:flex;gap:34px;align-items:center"><div style="display:flex;align-items:center;gap:0"><b style="width:44px;flex:none;font-size:17.8px">SKT</b><input value="{{ b.plans.SKT }}" onChange="{{ on.pSKT }}" style="{{ inp }};width:189px"></div><div style="display:flex;align-items:center;gap:0"><b style="width:32px;flex:none;font-size:17.8px">KT</b><input value="{{ b.plans.KT }}" onChange="{{ on.pKT }}" style="{{ inp }};width:189px"></div><div style="display:flex;align-items:center;gap:0"><b style="width:48px;flex:none;font-size:17.8px">LGU+</b><input value="{{ b.plans.LGU }}" onChange="{{ on.pLGU }}" style="{{ inp }};width:189px"></div></div></div>
+      <div style="margin-top:11px"><div style="font-size:17.8px;font-weight:600;line-height:22px;color:#1c1c1c;margin-bottom:8px">인터넷 속도 보조 문구</div><input value="{{ b.netNote }}" onChange="{{ on.netNote }}" style="{{ inp }};width:327px"></div>
+      <div style="display:flex;gap:37px;margin-top:14px;align-items:flex-start"><div style="width:471px;flex:none"><div style="font-size:17.8px;font-weight:600;line-height:22px;color:#1c1c1c;margin-bottom:8px">개인정보수집이용</div><textarea value="{{ b.privacy }}" onChange="{{ on.privacy }}" style="width:100%;height:217px;border:0;border-radius:14px;background:#f2f5f8;padding:12px 14px;font-size:14px;font-family:inherit;box-sizing:border-box;resize:none;outline:none"></textarea></div>
+      <div><div style="font-size:17.8px;font-weight:600;line-height:22px;color:#1c1c1c;margin-bottom:8px">플로팅 설정</div><div style="display:grid;gap:7px"><div style="display:flex;align-items:center"><span style="width:118px;flex:none;font-size:16px;color:#333">플로팅 기종명</span><input value="{{ b.floatModel }}" onChange="{{ on.floatModel }}" style="{{ inp }};width:190px"></div><div style="display:flex;align-items:center"><span style="width:118px;flex:none;font-size:16px;color:#333">플로팅 가격</span><input value="{{ b.floatPrice }}" onChange="{{ on.floatPrice }}" style="{{ inp }};width:190px"></div><div style="display:flex;align-items:center"><span style="width:118px;flex:none;font-size:16px;color:#333">말풍선</span><input value="{{ b.bubble }}" onChange="{{ on.bubble }}" style="{{ inp }};width:190px"></div><div style="display:flex;align-items:center"><span style="width:118px;flex:none;font-size:16px;color:#333">혜택명</span><input value="{{ b.benefit }}" onChange="{{ on.benefit }}" style="{{ inp }};width:190px"></div><div style="display:flex;align-items:center"><span style="width:118px;flex:none;font-size:16px;color:#333">버튼명</span><input value="{{ b.btnText }}" onChange="{{ on.btnText }}" style="{{ inp }};width:190px"></div></div></div></div>
+    </div>
+    </sc-if>
+
+    <sc-if value="{{ tabDetail }}" hint-placeholder-val="{{ false }}">
+    <div style="display:flex;gap:150px;align-items:flex-start;flex-wrap:wrap">
+      <div style="width:443px;flex:none"><div style="display:flex;justify-content:flex-end;margin-bottom:16px"><button onClick="{{ addDetail }}" style="border:0;background:#07d300;color:#fff;border-radius:6px;height:29px;padding:0 12px;white-space:nowrap;font-size:12px;cursor:pointer;font-family:inherit">상세페이지 목록 추가</button></div>
+        <sc-for list="{{ detailRows }}" as="d" hint-placeholder-count="2"><div draggable="true" onDragStart="{{ d.ds }}" onDragOver="{{ d.dov }}" onDrop="{{ d.drop }}" style="display:flex;align-items:center;gap:8px;margin-bottom:16px"><span style="font-size:22px;color:#999;cursor:grab;width:26px;text-align:center">&#9776;</span><span style="width:26px;height:26px;border-radius:50%;background:#1c1c1c;color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;flex:none">{{ d.n }}</span><input value="{{ d.name }}" onChange="{{ d.rename }}" style="{{ inp }};width:251px;height:29px;color:#888;font-size:13px"><label style="height:29px;width:52px;background:#1c1c1c;color:#fff;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:12px;cursor:pointer;flex:none">{{ d.attachLabel }}<input type="file" accept="image/*" onChange="{{ d.attach }}" style="display:none"></label><button onClick="{{ d.del }}" style="border:0;height:29px;width:52px;background:#ff0050;color:#fff;border-radius:6px;font-size:12px;cursor:pointer;font-family:inherit;flex:none">삭제하기</button></div></sc-for>
+      </div>
+      <div style="width:326px;flex:none;position:relative"><div style="position:absolute;top:-33px;left:0;right:0;text-align:center;font-size:16px;color:#333">미리보기</div><div style="height:653px;max-height:75vh;overflow:auto;border:1px solid #e6e9ee;border-radius:27px;background:#fff"><sc-for list="{{ detailImgs }}" as="d" hint-placeholder-count="2"><div style="{{ d.bg }}"></div></sc-for></div></div>
+    </div>
+    </sc-if>
+
+    <sc-if value="{{ tabReview }}" hint-placeholder-val="{{ false }}">
+    <div style="display:grid;grid-template-columns:repeat(4,minmax(240px,267px));gap:17px;align-items:start">
+      <sc-for list="{{ rvRows }}" as="r" hint-placeholder-count="4"><div>
+        <div style="border:1px solid #dfe3e9;border-radius:17px;overflow:hidden;background:#fff"><label style="{{ r.imgStyle }};height:156px;aspect-ratio:auto;display:flex;align-items:center;justify-content:center;cursor:pointer">{{ r.imgText }}<input type="file" accept="image/*" onChange="{{ r.attach }}" style="display:none"></label><div style="padding:14px 18px 16px"><div style="display:flex;justify-content:space-between;align-items:center;font-size:13px;color:#666"><span style="color:#ffc400;letter-spacing:2px;font-size:14px">{{ r.stars }}</span><span>{{ r.date }}</span></div><div style="font-size:13px;line-height:17px;color:#555;margin:11px 0 16px;height:68px;overflow:hidden;white-space:pre-line">{{ r.text }}</div><div style="display:flex;align-items:center;gap:8px;font-size:13px"><span style="width:30px;height:30px;border-radius:50%;background:#e6efff;color:#0055ff;display:flex;align-items:center;justify-content:center;font-size:13px">{{ r.initial }}</span>{{ r.name }} 고객님</div></div></div>
+        <div style="font-size:17.8px;font-weight:600;line-height:22px;color:#1c1c1c;margin-bottom:8px;margin:24px 0 8px">리뷰 텍스트</div><textarea value="{{ r.text }}" onChange="{{ r.setText }}" style="width:100%;height:114px;border:0;border-radius:6px;background:#f2f5f8;padding:12px 14px;font-size:13px;font-family:inherit;box-sizing:border-box;resize:none;outline:none;line-height:17px"></textarea>
+        <div style="font-size:17.8px;font-weight:600;line-height:22px;color:#1c1c1c;margin-bottom:8px;margin:14px 0 8px">고객명</div><input value="{{ r.name }}" onChange="{{ r.setName }}" style="{{ inp }}">
+        <div style="font-size:17.8px;font-weight:600;line-height:22px;color:#1c1c1c;margin-bottom:8px;margin:14px 0 8px">별점개수</div><input value="{{ r.starsN }}" onChange="{{ r.setStars }}" style="{{ inp }}">
+      </div></sc-for>
+    </div>
+    </sc-if>
+
+    <sc-if value="{{ tabFaq }}" hint-placeholder-val="{{ false }}">
+    <div style="display:grid;gap:21px"><sc-for list="{{ faqRows }}" as="f" hint-placeholder-count="5"><div style="display:flex;gap:48px;align-items:flex-start"><div style="width:357px;flex:none"><div style="font-size:17.8px;font-weight:600;line-height:22px;color:#1c1c1c;margin-bottom:8px">Q(질문)</div><input value="{{ f.q }}" onChange="{{ f.setQ }}" style="{{ inp }}"></div><div style="flex:1;max-width:714px"><div style="font-size:17.8px;font-weight:600;line-height:22px;color:#1c1c1c;margin-bottom:8px">A(답변)</div><textarea value="{{ f.a }}" onChange="{{ f.setA }}" style="width:100%;height:77px;border:0;border-radius:6px;background:#f2f5f8;padding:10px 9px;font-size:15.5px;font-family:inherit;box-sizing:border-box;resize:none;outline:none"></textarea></div></div></sc-for></div>
+    </sc-if>
+
+    <sc-if value="{{ tabStats }}" hint-placeholder-val="{{ false }}">
+<div style="background:#f0f1fd;border-radius:28px;padding:24px;display:grid;gap:14px;font-family:inherit">
+<div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><input type="date" value="{{ rFrom }}" max="{{ rTo }}" onChange="{{ onFrom }}" style="height:36px;border:0;border-radius:18px;background:#fff;padding:0 14px;font-size:12px;color:#2b2a55;font-family:inherit"><span style="color:#8b8ab0">~</span><input type="date" value="{{ rTo }}" max="{{ rToday }}" onChange="{{ onTo }}" style="height:36px;border:0;border-radius:18px;background:#fff;padding:0 14px;font-size:12px;color:#2b2a55;font-family:inherit"><sc-for list="{{ rangeBtns }}" as="r" hint-placeholder-count="3"><button onClick="{{ r.click }}" style="{{ r.style }}">{{ r.label }}</button></sc-for><span style="font-size:11px;color:#8b8ab0;margin-left:6px">{{ statsNote }}</span><div style="margin-left:auto;display:flex;gap:8px;flex-wrap:wrap"><sc-for list="{{ conn }}" as="c" hint-placeholder-count="5"><span title="{{ c.note }}" style="display:flex;align-items:center;gap:6px;background:#fff;border-radius:20px;padding:6px 12px;font-size:11px;color:#4a4977"><i style="width:7px;height:7px;border-radius:50%;{{ c.dot }}"></i>{{ c.name }}</span></sc-for></div></div>
+<sc-if value="{{ showGa }}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;align-items:baseline;gap:10px;margin:8px 0 -4px"><div style="font-size:18px;font-weight:800;color:#2b2a55">웹사이트 성과</div><div style="font-size:11.5px;color:#8b8ab0">Google Analytics 4</div></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px"><sc-for list="{{ kpis }}" as="k" hint-placeholder-count="6"><div style="background:#fff;border-radius:22px;padding:22px;box-shadow:0 6px 24px rgba(79,70,200,.07);min-width:0;padding:18px 20px"><div style="font-size:11.5px;color:#8b8ab0">{{ k.label }}</div><div style="font-size:26px;font-weight:800;color:#2b2a55;margin-top:8px;letter-spacing:-.5px">{{ k.value }}</div><div style="font-size:11px;margin-top:6px;font-weight:600;color:{{ k.dc }};min-height:14px">{{ k.dt }}</div></div></sc-for></div>
+<div style="display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:14px"><div style="background:#fff;border-radius:22px;padding:22px;box-shadow:0 6px 24px rgba(79,70,200,.07);min-width:0"><div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap"><div><div style="font-size:15px;font-weight:700;color:#2b2a55">일별 세션 · 상담신청</div><div style="font-size:11.5px;color:#8b8ab0;margin-top:3px">상담신청은 별도 축 기준</div></div><div style="display:flex;gap:14px;font-size:11.5px;color:#4a4977"><sc-for list="{{ gaLegend }}" as="l" hint-placeholder-count="2"><span style="display:flex;align-items:center;gap:6px"><i style="width:16px;height:3px;border-radius:2px;{{ l.style }}"></i>{{ l.name }}</span></sc-for></div></div><div style="position:relative;margin:18px 0 0 40px;height:200px"><sc-for list="{{ gaChart.grid }}" as="g" hint-placeholder-count="5"><div style="position:absolute;left:0;right:0;top:{{ g.top }};border-top:1px dashed #e4e2f7"><span style="position:absolute;left:-40px;top:-7px;font-size:10px;color:#a5a3c7;width:34px;text-align:right">{{ g.label }}</span></div></sc-for><svg viewBox="0 0 600 200" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;overflow:visible"><sc-for list="{{ gaChart.paths }}" as="p" hint-placeholder-count="2"><g><path d="{{ p.area }}" style="{{ p.as }}"></path><path d="{{ p.d }}" style="{{ p.ls }}"></path></g></sc-for></svg></div><div style="display:flex;justify-content:space-between;margin:8px 0 0 40px;font-size:10px;color:#a5a3c7"><sc-for list="{{ gaChart.xl }}" as="x" hint-placeholder-count="6"><span>{{ x }}</span></sc-for></div></div><div style="background:#fff;border-radius:22px;padding:22px;box-shadow:0 6px 24px rgba(79,70,200,.07);min-width:0"><div style="font-size:15px;font-weight:700;color:#2b2a55">기기 비율</div><div style="font-size:11.5px;color:#8b8ab0;margin-top:3px">세션 기준</div><div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin-top:16px"><div style="width:130px;height:130px;border-radius:50%;flex:none;position:relative;background:{{ devDonut.bg }}"><div style="position:absolute;inset:26px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#2b2a55">{{ devDonut.center }}</div></div><div style="display:grid;gap:9px;flex:1;min-width:110px"><sc-for list="{{ devDonut.legend }}" as="l" hint-placeholder-count="3"><div style="display:flex;align-items:center;gap:8px;font-size:12px;color:#4a4977"><span style="width:10px;height:10px;border-radius:3px;flex:none;{{ l.style }}"></span><span style="flex:1">{{ l.name }}</span><b style="color:#2b2a55">{{ l.pct }}</b></div></sc-for></div></div></div></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px"><div style="background:#fff;border-radius:22px;padding:22px;box-shadow:0 6px 24px rgba(79,70,200,.07);min-width:0"><div style="font-size:15px;font-weight:700;color:#2b2a55">전환 퍼널</div><div style="font-size:11.5px;color:#8b8ab0;margin-top:3px;margin-bottom:14px">방문부터 상담 신청까지</div><sc-for list="{{ funnel }}" as="f" hint-placeholder-count="4"><div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:12px;color:#4a4977;margin-bottom:5px"><span>{{ f.label }}</span><span><b style="color:#2b2a55">{{ f.count }}</b> <span style="color:#a5a3c7">{{ f.pct }}</span></span></div><div style="height:26px;border-radius:8px;background:#eceafc"><div style="height:26px;border-radius:8px;background:{{ f.c }};width:{{ f.w }}"></div></div></div></sc-for></div><div style="background:#fff;border-radius:22px;padding:22px;box-shadow:0 6px 24px rgba(79,70,200,.07);min-width:0"><div style="font-size:15px;font-weight:700;color:#2b2a55">스크롤 깊이</div><div style="font-size:11.5px;color:#8b8ab0;margin-top:3px;margin-bottom:14px">페이지 도달 구간별 이벤트</div><sc-for list="{{ scrollRows }}" as="r" hint-placeholder-count="4"><div style="margin-bottom:12px"><div style="display:flex;justify-content:space-between;gap:8px;font-size:12px;color:#4a4977;margin-bottom:5px"><span style="min-width:0;overflow-wrap:anywhere">{{ r.name }}</span><b style="color:#2b2a55">{{ r.v }}</b></div><div style="height:8px;border-radius:4px;background:#eceafc"><div style="height:8px;border-radius:4px;background:{{ r.c }};width:{{ r.w }}"></div></div></div></sc-for></div><div style="background:#fff;border-radius:22px;padding:22px;box-shadow:0 6px 24px rgba(79,70,200,.07);min-width:0"><div style="font-size:15px;font-weight:700;color:#2b2a55">유입 채널</div><div style="font-size:11.5px;color:#8b8ab0;margin-top:3px;margin-bottom:14px">기본 채널 그룹</div><sc-for list="{{ chRows }}" as="r" hint-placeholder-count="4"><div style="margin-bottom:12px"><div style="display:flex;justify-content:space-between;gap:8px;font-size:12px;color:#4a4977;margin-bottom:5px"><span style="min-width:0;overflow-wrap:anywhere">{{ r.name }}</span><b style="color:#2b2a55">{{ r.v }}</b></div><div style="height:8px;border-radius:4px;background:#eceafc"><div style="height:8px;border-radius:4px;background:{{ r.c }};width:{{ r.w }}"></div></div></div></sc-for></div></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px"><div style="background:#fff;border-radius:22px;padding:22px;box-shadow:0 6px 24px rgba(79,70,200,.07);min-width:0"><div style="font-size:15px;font-weight:700;color:#2b2a55">시간대별 세션</div><div style="font-size:11.5px;color:#8b8ab0;margin-top:3px">0~23시</div><div style="display:flex;align-items:flex-end;gap:4px;height:130px;margin-top:16px"><sc-for list="{{ hourCols }}" as="c" hint-placeholder-count="12"><div style="flex:1;height:100%;display:flex;align-items:flex-end"><div style="width:100%;border-radius:6px 6px 2px 2px;background:{{ c.c }};height:{{ c.h }}"></div></div></sc-for></div><div style="display:flex;gap:4px;margin-top:6px"><sc-for list="{{ hourCols }}" as="c" hint-placeholder-count="12"><span style="flex:1;text-align:center;font-size:9.5px;color:#a5a3c7;white-space:nowrap">{{ c.l }}</span></sc-for></div></div><div style="background:#fff;border-radius:22px;padding:22px;box-shadow:0 6px 24px rgba(79,70,200,.07);min-width:0"><div style="font-size:15px;font-weight:700;color:#2b2a55">요일별 세션</div><div style="font-size:11.5px;color:#8b8ab0;margin-top:3px">기간 합계</div><div style="display:flex;align-items:flex-end;gap:4px;height:130px;margin-top:16px"><sc-for list="{{ dowCols }}" as="c" hint-placeholder-count="12"><div style="flex:1;height:100%;display:flex;align-items:flex-end"><div style="width:100%;border-radius:6px 6px 2px 2px;background:{{ c.c }};height:{{ c.h }}"></div></div></sc-for></div><div style="display:flex;gap:4px;margin-top:6px"><sc-for list="{{ dowCols }}" as="c" hint-placeholder-count="12"><span style="flex:1;text-align:center;font-size:9.5px;color:#a5a3c7;white-space:nowrap">{{ c.l }}</span></sc-for></div></div><div style="background:#fff;border-radius:22px;padding:22px;box-shadow:0 6px 24px rgba(79,70,200,.07);min-width:0"><div style="font-size:15px;font-weight:700;color:#2b2a55">신규 / 재방문</div><div style="font-size:11.5px;color:#8b8ab0;margin-top:3px">사용자 구분</div><div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin-top:16px"><div style="width:130px;height:130px;border-radius:50%;flex:none;position:relative;background:{{ nrDonut.bg }}"><div style="position:absolute;inset:26px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#2b2a55">{{ nrDonut.center }}</div></div><div style="display:grid;gap:9px;flex:1;min-width:110px"><sc-for list="{{ nrDonut.legend }}" as="l" hint-placeholder-count="3"><div style="display:flex;align-items:center;gap:8px;font-size:12px;color:#4a4977"><span style="width:10px;height:10px;border-radius:3px;flex:none;{{ l.style }}"></span><span style="flex:1">{{ l.name }}</span><b style="color:#2b2a55">{{ l.pct }}</b></div></sc-for></div></div></div></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px"><div style="background:#fff;border-radius:22px;padding:22px;box-shadow:0 6px 24px rgba(79,70,200,.07);min-width:0"><div style="font-size:15px;font-weight:700;color:#2b2a55">지역별 세션</div><div style="font-size:11.5px;color:#8b8ab0;margin-top:3px;margin-bottom:14px">상위 지역</div><sc-for list="{{ regRows }}" as="r" hint-placeholder-count="4"><div style="margin-bottom:12px"><div style="display:flex;justify-content:space-between;gap:8px;font-size:12px;color:#4a4977;margin-bottom:5px"><span style="min-width:0;overflow-wrap:anywhere">{{ r.name }}</span><b style="color:#2b2a55">{{ r.v }}</b></div><div style="height:8px;border-radius:4px;background:#eceafc"><div style="height:8px;border-radius:4px;background:{{ r.c }};width:{{ r.w }}"></div></div></div></sc-for></div><div style="background:#fff;border-radius:22px;padding:22px;box-shadow:0 6px 24px rgba(79,70,200,.07);min-width:0"><div style="font-size:15px;font-weight:700;color:#2b2a55">인기 페이지</div><div style="font-size:11.5px;color:#8b8ab0;margin-top:3px;margin-bottom:14px">페이지뷰 기준</div><sc-for list="{{ pageRows }}" as="r" hint-placeholder-count="4"><div style="margin-bottom:12px"><div style="display:flex;justify-content:space-between;gap:8px;font-size:12px;color:#4a4977;margin-bottom:5px"><span style="min-width:0;overflow-wrap:anywhere">{{ r.name }}</span><b style="color:#2b2a55">{{ r.v }}</b></div><div style="height:8px;border-radius:4px;background:#eceafc"><div style="height:8px;border-radius:4px;background:{{ r.c }};width:{{ r.w }}"></div></div></div></sc-for></div><div style="background:#fff;border-radius:22px;padding:22px;box-shadow:0 6px 24px rgba(79,70,200,.07);min-width:0"><div style="font-size:15px;font-weight:700;color:#2b2a55">주요 이벤트</div><div style="font-size:11.5px;color:#8b8ab0;margin-top:3px;margin-bottom:14px">GA4 이벤트 수</div><sc-for list="{{ evRows }}" as="r" hint-placeholder-count="4"><div style="margin-bottom:12px"><div style="display:flex;justify-content:space-between;gap:8px;font-size:12px;color:#4a4977;margin-bottom:5px"><span style="min-width:0;overflow-wrap:anywhere">{{ r.name }}</span><b style="color:#2b2a55">{{ r.v }}</b></div><div style="height:8px;border-radius:4px;background:#eceafc"><div style="height:8px;border-radius:4px;background:{{ r.c }};width:{{ r.w }}"></div></div></div></sc-for></div></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px"><div style="background:#fff;border-radius:22px;padding:22px;box-shadow:0 6px 24px rgba(79,70,200,.07);min-width:0"><div style="font-size:15px;font-weight:700;color:#2b2a55">유입 경로</div><div style="font-size:11.5px;color:#8b8ab0;margin-top:3px;margin-bottom:14px">소스 / 매체</div><sc-for list="{{ srcRows }}" as="r" hint-placeholder-count="4"><div style="margin-bottom:12px"><div style="display:flex;justify-content:space-between;gap:8px;font-size:12px;color:#4a4977;margin-bottom:5px"><span style="min-width:0;overflow-wrap:anywhere">{{ r.name }}</span><b style="color:#2b2a55">{{ r.v }}</b></div><div style="height:8px;border-radius:4px;background:#eceafc"><div style="height:8px;border-radius:4px;background:{{ r.c }};width:{{ r.w }}"></div></div></div></sc-for></div><div style="background:#fff;border-radius:22px;padding:22px;box-shadow:0 6px 24px rgba(79,70,200,.07);min-width:0"><div style="font-size:15px;font-weight:700;color:#2b2a55">광고 소재</div><div style="font-size:11.5px;color:#8b8ab0;margin-top:3px;margin-bottom:14px">캠페인 · 소재(utm_content)</div><sc-for list="{{ cmpRows }}" as="r" hint-placeholder-count="4"><div style="margin-bottom:12px"><div style="display:flex;justify-content:space-between;gap:8px;font-size:12px;color:#4a4977;margin-bottom:5px"><span style="min-width:0;overflow-wrap:anywhere">{{ r.name }}</span><b style="color:#2b2a55">{{ r.v }}</b></div><div style="height:8px;border-radius:4px;background:#eceafc"><div style="height:8px;border-radius:4px;background:{{ r.c }};width:{{ r.w }}"></div></div></div></sc-for></div></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px"><div style="background:#fff;border-radius:22px;padding:22px;box-shadow:0 6px 24px rgba(79,70,200,.07);min-width:0"><div style="font-size:15px;font-weight:700;color:#2b2a55">성별</div><div style="font-size:11.5px;color:#8b8ab0;margin-top:3px">GA4 · Google 신호 활성화 시 수집</div><div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin-top:16px"><div style="width:130px;height:130px;border-radius:50%;flex:none;position:relative;background:{{ genDonut.bg }}"><div style="position:absolute;inset:26px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#2b2a55">{{ genDonut.center }}</div></div><div style="display:grid;gap:9px;flex:1;min-width:110px"><sc-for list="{{ genDonut.legend }}" as="l" hint-placeholder-count="3"><div style="display:flex;align-items:center;gap:8px;font-size:12px;color:#4a4977"><span style="width:10px;height:10px;border-radius:3px;flex:none;{{ l.style }}"></span><span style="flex:1">{{ l.name }}</span><b style="color:#2b2a55">{{ l.pct }}</b></div></sc-for></div></div></div><div style="background:#fff;border-radius:22px;padding:22px;box-shadow:0 6px 24px rgba(79,70,200,.07);min-width:0"><div style="font-size:15px;font-weight:700;color:#2b2a55">운영체제</div><div style="font-size:11.5px;color:#8b8ab0;margin-top:3px">Android / iOS 등</div><div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin-top:16px"><div style="width:130px;height:130px;border-radius:50%;flex:none;position:relative;background:{{ osDonut.bg }}"><div style="position:absolute;inset:26px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#2b2a55">{{ osDonut.center }}</div></div><div style="display:grid;gap:9px;flex:1;min-width:110px"><sc-for list="{{ osDonut.legend }}" as="l" hint-placeholder-count="3"><div style="display:flex;align-items:center;gap:8px;font-size:12px;color:#4a4977"><span style="width:10px;height:10px;border-radius:3px;flex:none;{{ l.style }}"></span><span style="flex:1">{{ l.name }}</span><b style="color:#2b2a55">{{ l.pct }}</b></div></sc-for></div></div></div><div style="background:#fff;border-radius:22px;padding:22px;box-shadow:0 6px 24px rgba(79,70,200,.07);min-width:0"><div style="font-size:15px;font-weight:700;color:#2b2a55">연령대</div><div style="font-size:11.5px;color:#8b8ab0;margin:3px 0 14px">세션 기준</div><sc-for list="{{ ageRows }}" as="r" hint-placeholder-count="4"><div style="margin-bottom:12px"><div style="display:flex;justify-content:space-between;gap:8px;font-size:12px;color:#4a4977;margin-bottom:5px"><span>{{ r.name }}</span><b style="color:#2b2a55">{{ r.v }}</b></div><div style="height:8px;border-radius:4px;background:#eceafc"><div style="height:8px;border-radius:4px;background:{{ r.c }};width:{{ r.w }}"></div></div></div></sc-for></div></div>
+</sc-if>
+<sc-if value="{{ noGa }}" hint-placeholder-val="{{ false }}"><div style="display:flex;align-items:baseline;gap:10px;margin:8px 0 -4px"><div style="font-size:18px;font-weight:800;color:#2b2a55">웹사이트 성과</div><div style="font-size:11.5px;color:#8b8ab0">Google Analytics 4</div></div><div style="background:#fff;border-radius:22px;padding:22px;box-shadow:0 6px 24px rgba(79,70,200,.07);min-width:0;display:flex;align-items:center;gap:16px;border:1.5px dashed #cfcdf0;box-shadow:none;background:#f7f7ff"><i style="width:12px;height:12px;border-radius:50%;background:#c9c8e6;flex:none"></i><div><div style="font-size:15px;font-weight:700;color:#2b2a55">미연결 상태</div><div style="font-size:12px;color:#8b8ab0;margin-top:4px;line-height:1.6">GA4 Data API가 연결되지 않았습니다. GA4_PROPERTY_ID, GOOGLE_SERVICE_ACCOUNT_JSON 환경변수를 등록하세요.</div></div></div></sc-if>
+<sc-if value="{{ showMeta }}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;align-items:baseline;gap:10px;margin:8px 0 -4px"><div style="font-size:18px;font-weight:800;color:#2b2a55">Meta 광고</div><div style="font-size:11.5px;color:#8b8ab0">Meta Pixel · Conversions API · Marketing API</div></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px"><sc-for list="{{ mKpis }}" as="k" hint-placeholder-count="6"><div style="background:#fff;border-radius:22px;padding:22px;box-shadow:0 6px 24px rgba(79,70,200,.07);min-width:0;padding:18px 20px"><div style="font-size:11.5px;color:#8b8ab0">{{ k.label }}</div><div style="font-size:26px;font-weight:800;color:#2b2a55;margin-top:8px;letter-spacing:-.5px">{{ k.value }}</div><div style="font-size:11px;margin-top:6px;font-weight:600;color:{{ k.dc }};min-height:14px">{{ k.dt }}</div></div></sc-for></div>
+<div style="display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:14px"><div style="background:#fff;border-radius:22px;padding:22px;box-shadow:0 6px 24px rgba(79,70,200,.07);min-width:0"><div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap"><div><div style="font-size:15px;font-weight:700;color:#2b2a55">일별 광고비 · 리드</div><div style="font-size:11.5px;color:#8b8ab0;margin-top:3px">리드는 별도 축 기준</div></div><div style="display:flex;gap:14px;font-size:11.5px;color:#4a4977"><sc-for list="{{ mLegend }}" as="l" hint-placeholder-count="2"><span style="display:flex;align-items:center;gap:6px"><i style="width:16px;height:3px;border-radius:2px;{{ l.style }}"></i>{{ l.name }}</span></sc-for></div></div><div style="position:relative;margin:18px 0 0 40px;height:200px"><sc-for list="{{ mChart.grid }}" as="g" hint-placeholder-count="5"><div style="position:absolute;left:0;right:0;top:{{ g.top }};border-top:1px dashed #e4e2f7"><span style="position:absolute;left:-40px;top:-7px;font-size:10px;color:#a5a3c7;width:34px;text-align:right">{{ g.label }}</span></div></sc-for><svg viewBox="0 0 600 200" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;overflow:visible"><sc-for list="{{ mChart.paths }}" as="p" hint-placeholder-count="2"><g><path d="{{ p.area }}" style="{{ p.as }}"></path><path d="{{ p.d }}" style="{{ p.ls }}"></path></g></sc-for></svg></div><div style="display:flex;justify-content:space-between;margin:8px 0 0 40px;font-size:10px;color:#a5a3c7"><sc-for list="{{ mChart.xl }}" as="x" hint-placeholder-count="6"><span>{{ x }}</span></sc-for></div></div><div style="background:#fff;border-radius:22px;padding:22px;box-shadow:0 6px 24px rgba(79,70,200,.07);min-width:0"><div style="font-size:15px;font-weight:700;color:#2b2a55">게재 위치별 광고비</div><div style="font-size:11.5px;color:#8b8ab0;margin-top:3px">Facebook / Instagram 등</div><div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin-top:16px"><div style="width:130px;height:130px;border-radius:50%;flex:none;position:relative;background:{{ plDonut.bg }}"><div style="position:absolute;inset:26px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#2b2a55">{{ plDonut.center }}</div></div><div style="display:grid;gap:9px;flex:1;min-width:110px"><sc-for list="{{ plDonut.legend }}" as="l" hint-placeholder-count="3"><div style="display:flex;align-items:center;gap:8px;font-size:12px;color:#4a4977"><span style="width:10px;height:10px;border-radius:3px;flex:none;{{ l.style }}"></span><span style="flex:1">{{ l.name }}</span><b style="color:#2b2a55">{{ l.pct }}</b></div></sc-for></div></div></div></div>
+<div style="display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:14px"><div style="background:#fff;border-radius:22px;padding:22px;box-shadow:0 6px 24px rgba(79,70,200,.07);min-width:0"><div style="font-size:15px;font-weight:700;color:#2b2a55">캠페인 성과</div><div style="font-size:11.5px;color:#8b8ab0;margin-top:3px;margin-bottom:12px">광고비 순</div><div style="overflow:auto"><div style="display:grid;grid-template-columns:minmax(120px,2fr) repeat(4,minmax(70px,1fr));gap:8px;font-size:11px;color:#8b8ab0;padding:0 0 8px;border-bottom:1px solid #eceafc;min-width:420px"><span>캠페인</span><span style="text-align:right">광고비</span><span style="text-align:right">클릭</span><span style="text-align:right">리드</span><span style="text-align:right">CPL</span></div><sc-for list="{{ mCamp }}" as="r" hint-placeholder-count="4"><div style="display:grid;grid-template-columns:minmax(120px,2fr) repeat(4,minmax(70px,1fr));gap:8px;font-size:12px;color:#2b2a55;padding:11px 0;border-bottom:1px solid #f1f0fc;min-width:420px"><span style="overflow-wrap:anywhere;font-weight:600">{{ r.name }}</span><span style="text-align:right">{{ r.spend }}</span><span style="text-align:right">{{ r.clicks }}</span><span style="text-align:right;color:#4f46c8;font-weight:700">{{ r.leads }}</span><span style="text-align:right">{{ r.cpl }}</span></div></sc-for></div></div><div style="background:#fff;border-radius:22px;padding:22px;box-shadow:0 6px 24px rgba(79,70,200,.07);min-width:0"><div style="font-size:15px;font-weight:700;color:#2b2a55">픽셀 / CAPI 이벤트</div><div style="font-size:11.5px;color:#8b8ab0;margin-top:3px;margin-bottom:14px">Meta 전환 이벤트 수</div><sc-for list="{{ pxRows }}" as="r" hint-placeholder-count="4"><div style="margin-bottom:12px"><div style="display:flex;justify-content:space-between;gap:8px;font-size:12px;color:#4a4977;margin-bottom:5px"><span style="min-width:0;overflow-wrap:anywhere">{{ r.name }}</span><b style="color:#2b2a55">{{ r.v }}</b></div><div style="height:8px;border-radius:4px;background:#eceafc"><div style="height:8px;border-radius:4px;background:{{ r.c }};width:{{ r.w }}"></div></div></div></sc-for></div></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px"><div style="background:#fff;border-radius:22px;padding:22px;box-shadow:0 6px 24px rgba(79,70,200,.07);min-width:0"><div style="font-size:15px;font-weight:700;color:#2b2a55">성별 광고 성과</div><div style="font-size:11.5px;color:#8b8ab0;margin-top:3px">리드 기준</div><div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin-top:16px"><div style="width:130px;height:130px;border-radius:50%;flex:none;position:relative;background:{{ mGenDonut.bg }}"><div style="position:absolute;inset:26px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#2b2a55">{{ mGenDonut.center }}</div></div><div style="display:grid;gap:9px;flex:1;min-width:110px"><sc-for list="{{ mGenDonut.legend }}" as="l" hint-placeholder-count="3"><div style="display:flex;align-items:center;gap:8px;font-size:12px;color:#4a4977"><span style="width:10px;height:10px;border-radius:3px;flex:none;{{ l.style }}"></span><span style="flex:1">{{ l.name }}</span><b style="color:#2b2a55">{{ l.pct }}</b></div></sc-for></div></div></div><div style="background:#fff;border-radius:22px;padding:22px;box-shadow:0 6px 24px rgba(79,70,200,.07);min-width:0"><div style="font-size:15px;font-weight:700;color:#2b2a55">연령대별 리드</div><div style="font-size:11.5px;color:#8b8ab0;margin:3px 0 14px">Meta 광고 노출 대상 기준</div><sc-for list="{{ mAgeRows }}" as="r" hint-placeholder-count="4"><div style="margin-bottom:12px"><div style="display:flex;justify-content:space-between;gap:8px;font-size:12px;color:#4a4977;margin-bottom:5px"><span>{{ r.name }}</span><b style="color:#2b2a55">{{ r.v }}</b></div><div style="height:8px;border-radius:4px;background:#eceafc"><div style="height:8px;border-radius:4px;background:{{ r.c }};width:{{ r.w }}"></div></div></div></sc-for></div><div style="background:#fff;border-radius:22px;padding:22px;box-shadow:0 6px 24px rgba(79,70,200,.07);min-width:0"><div style="font-size:15px;font-weight:700;color:#2b2a55">연령대별 광고비</div><div style="font-size:11.5px;color:#8b8ab0;margin:3px 0 14px"></div><sc-for list="{{ mAgeSpend }}" as="r" hint-placeholder-count="4"><div style="margin-bottom:12px"><div style="display:flex;justify-content:space-between;gap:8px;font-size:12px;color:#4a4977;margin-bottom:5px"><span>{{ r.name }}</span><b style="color:#2b2a55">{{ r.v }}</b></div><div style="height:8px;border-radius:4px;background:#eceafc"><div style="height:8px;border-radius:4px;background:{{ r.c }};width:{{ r.w }}"></div></div></div></sc-for></div></div>
+</sc-if>
+<sc-if value="{{ noMeta }}" hint-placeholder-val="{{ false }}"><div style="display:flex;align-items:baseline;gap:10px;margin:8px 0 -4px"><div style="font-size:18px;font-weight:800;color:#2b2a55">Meta 광고</div><div style="font-size:11.5px;color:#8b8ab0">Meta Pixel · Conversions API · Marketing API</div></div><div style="background:#fff;border-radius:22px;padding:22px;box-shadow:0 6px 24px rgba(79,70,200,.07);min-width:0;display:flex;align-items:center;gap:16px;border:1.5px dashed #cfcdf0;box-shadow:none;background:#f7f7ff"><i style="width:12px;height:12px;border-radius:50%;background:#c9c8e6;flex:none"></i><div><div style="font-size:15px;font-weight:700;color:#2b2a55">미연결 상태</div><div style="font-size:12px;color:#8b8ab0;margin-top:4px;line-height:1.6">Meta Marketing API가 연결되지 않았습니다. META_ACCESS_TOKEN, META_AD_ACCOUNT_ID 환경변수를 등록하세요.</div></div></div></sc-if>
+<div style="background:#fff;border-radius:22px;padding:22px;box-shadow:0 6px 24px rgba(79,70,200,.07);min-width:0"><div style="font-size:15px;font-weight:700;color:#2b2a55">수집 연동 안내</div><div style="font-size:11.5px;color:#8b8ab0;margin-top:3px;margin-bottom:12px">환경변수를 등록하면 실제 데이터가 표시됩니다.</div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px"><sc-for list="{{ conn }}" as="c" hint-placeholder-count="5"><div style="display:flex;gap:10px;align-items:flex-start;background:#f7f7ff;border-radius:14px;padding:12px 14px"><i style="width:8px;height:8px;border-radius:50%;margin-top:5px;flex:none;{{ c.dot }}"></i><div><div style="font-size:12px;font-weight:700;color:#2b2a55">{{ c.name }}</div><div style="font-size:11px;color:#8b8ab0;margin-top:2px;overflow-wrap:anywhere">{{ c.note }}</div></div></div></sc-for></div></div>
+</div>
+</sc-if>
+
+    <sc-if value="{{ tabLeads }}" hint-placeholder-val="{{ false }}">
+    <div>
+      <div style="display:flex;justify-content:space-between;margin-bottom:12px;gap:12px">
+        <div style="display:flex;gap:10px"><sc-for list="{{ leadTabs }}" as="t" hint-placeholder-count="4"><button onClick="{{ t.click }}" style="{{ t.style }}">{{ t.label }} &nbsp;{{ t.count }}</button></sc-for></div>
+        <div style="display:flex;gap:10px"><select value="{{ searchKey }}" onChange="{{ onSearchKey }}" style="width:160px;height:44.6px;border:0;border-radius:6px;background:#f2f5f8;padding:0 14px;font-size:16.4px;font-weight:600"><option value="phone">연락처</option><option value="name">고객명</option><option value="plan">요금제</option></select><input value="{{ searchVal }}" onChange="{{ onSearchVal }}" placeholder="검색어를 입력하세요" style="{{ inp }};width:263px;height:44.6px"></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1.5fr 1fr 1.3fr .8fr 1.1fr 1.1fr .9fr 70px;background:#f2f5f8;border-radius:6px;padding:0 8px;height:44px;align-items:center;font-weight:600;text-align:center;font-size:17.8px"><span>접수일자</span><span>고객명</span><span>연락처</span><span>통신사</span><span>요금제</span><span>신청모델</span><span>인터넷</span><span>삭제</span></div>
+      <sc-for list="{{ leadRows }}" as="l" hint-placeholder-count="5"><div style="display:grid;grid-template-columns:1.5fr 1fr 1.3fr .8fr 1.1fr 1.1fr .9fr 70px;height:34.3px;padding:0 8px;text-align:center;font-size:16.4px;font-weight:300;color:#1c1c1c;align-items:center"><span>{{ l.date }}</span><span>{{ l.name }}</span><span>{{ l.phone }}</span><span>{{ l.carrier }}</span><span>{{ l.plan }}</span><span>{{ l.model }}</span><span>{{ l.internet }}</span><button onClick="{{ l.del }}" style="border:0;background:#ffe3ec;color:#e0003f;border-radius:6px;padding:5px 8px;font-size:9.6px">삭제</button></div></sc-for>
+      <div style="display:flex;justify-content:center;gap:8px;margin-top:20px;align-items:center"><button onClick="{{ prevPage }}" style="border:0;background:#f2f5f8;border-radius:8px;padding:8px 14px">이전</button><span style="font-size:10.4px">{{ pageText }}</span><button onClick="{{ nextPage }}" style="border:0;background:#f2f5f8;border-radius:8px;padding:8px 14px">다음</button></div>
+    </div>
+    </sc-if>
+
+    <sc-if value="{{ tabAdmin }}" hint-placeholder-val="{{ false }}">
+    <div style="display:grid;gap:30px;max-width:980px">
+      <div><div style="{{ lb }}">구글 스프레드시트 연결</div><div style="display:flex;gap:10px"><input value="{{ b.sheetId }}" onChange="{{ on.sheetId }}" placeholder="스프레드시트 ID 또는 URL" style="{{ inp }};flex:1"><button onClick="{{ connectSheet }}" style="border:0;background:#111;color:#fff;border-radius:8px;padding:0 20px;font-size:11.2px">연동하기</button></div><div style="font-size:9.6px;color:#888;margin-top:8px">서비스계정 이메일을 해당 시트의 편집자로 공유해야 접수 데이터가 실시간 입력됩니다. 시트 양식은 엑셀 다운로드와 동일합니다.</div></div>
+      <div><div style="{{ lb }}">관리자 모드</div><div style="display:flex;gap:12px"><input value="{{ newId }}" onChange="{{ onNewId }}" placeholder="아이디를 입력 해주세요" style="{{ inp }};width:300px"><input type="password" value="{{ newPw }}" onChange="{{ onNewPw }}" placeholder="비밀번호를 입력 해주세요" style="{{ inp }};width:300px"><button onClick="{{ changeAdmin }}" style="border:0;background:#111;color:#fff;border-radius:8px;padding:0 18px;font-size:11.2px">변경하기</button></div></div>
+      <div style="max-width:620px"><div style="{{ lb }}">사전 승낙서 링크</div><input value="{{ b.preLink }}" onChange="{{ on.preLink }}" placeholder="링크를 입력 해주세요" style="{{ inp }}"></div>
+      <div style="max-width:700px"><div style="{{ lb }}">하단푸터</div><div style="display:grid;gap:10px">
+        <div style="display:grid;grid-template-columns:170px 1fr;align-items:center"><b style="font-size:11.2px">회사명</b><input value="{{ b.footer.company }}" onChange="{{ on.fCompany }}" style="{{ inp }}"></div>
+        <div style="display:grid;grid-template-columns:170px 1fr;align-items:center"><b style="font-size:11.2px">대표이사</b><input value="{{ b.footer.ceo }}" onChange="{{ on.fCeo }}" style="{{ inp }}"></div>
+        <div style="display:grid;grid-template-columns:170px 1fr;align-items:center"><b style="font-size:11.2px">사업자등록번호</b><input value="{{ b.footer.bizNo }}" onChange="{{ on.fBiz }}" style="{{ inp }}"></div>
+        <div style="display:grid;grid-template-columns:170px 1fr;align-items:center"><b style="font-size:11.2px">사업장 주소지</b><input value="{{ b.footer.addr }}" onChange="{{ on.fAddr }}" style="{{ inp }}"></div>
+        <div style="display:grid;grid-template-columns:170px 1fr;align-items:center"><b style="font-size:11.2px">통신판매업신고번호</b><input value="{{ b.footer.reportNo }}" onChange="{{ on.fReport }}" style="{{ inp }}"></div>
+        <div style="display:grid;grid-template-columns:170px 1fr;align-items:center"><b style="font-size:11.2px">대표번호</b><input value="{{ b.footer.tel }}" onChange="{{ on.fTel }}" style="{{ inp }}"></div>
+        <div style="display:grid;grid-template-columns:170px 1fr;align-items:center"><b style="font-size:11.2px">모든권리 보유</b><input value="{{ b.footer.rights }}" onChange="{{ on.fRights }}" style="{{ inp }}"></div>
+      </div></div>
+    </div>
+    </sc-if>
+  </div>
+ </div>
+</div>
+</sc-if>
+
+<sc-if value="{{ popup }}" hint-placeholder-val="{{ false }}">
+<div style="position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:500;display:flex;align-items:center;justify-content:center;padding:20px">
+  <div style="background:#fff;border-radius:24px;padding:34px 30px 26px;width:100%;max-width:{{ popup.w }};text-align:center;animation:ddPop .2s ease-out;max-height:80vh;overflow:auto">
+    <sc-if value="{{ popup.spin }}" hint-placeholder-val="{{ false }}"><div style="width:44px;height:44px;margin:0 auto 16px;border:5px solid #dbe6ff;border-top-color:#1a5cff;border-radius:50%;animation:ddSpin .8s linear infinite"></div></sc-if>
+    <sc-if value="{{ popup.check }}" hint-placeholder-val="{{ false }}"><div style="width:52px;height:52px;margin:0 auto 16px;border-radius:50%;background:#0a48ff;color:#fff;font-size:28px;line-height:52px">&#10003;</div></sc-if>
+    <sc-if value="{{ popup.done }}" hint-placeholder-val="{{ false }}"><div style="width:230px;height:230px;margin:-6px auto -2px;background:url(assets/done.png) center/contain no-repeat"></div></sc-if>
+    <div style="font-size:{{ popup.tsize }};font-weight:800;margin-bottom:10px;color:#1c1c1c;letter-spacing:-.02em">{{ popup.title }}</div>
+    <div style="font-size:{{ popup.msize }};font-weight:{{ popup.mweight }};line-height:1.65;color:{{ popup.mcolor }};white-space:pre-line;text-align:{{ popup.align }}">{{ popup.msg }}</div>
+    <sc-if value="{{ popup.closable }}" hint-placeholder-val="{{ false }}"><button onClick="{{ closePopup }}" style="margin-top:22px;width:100%;height:48px;border:0;border-radius:12px;background:#0a48ff;color:#fff;font-size:16px;font-weight:700">확인</button></sc-if>
+  </div>
+</div>
+</sc-if>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  cfg = Object.assign({ firebase: { apiKey: 'AIzaSyCsdPTAqpHYUkj75UyvzJaQFt1XtddkclI', authDomain: 'dangdang-bc3ea.firebaseapp.com', projectId: 'dangdang-bc3ea', storageBucket: 'dangdang-bc3ea.firebasestorage.app', messagingSenderId: '431389244294', appId: '1:431389244294:web:f407720caa16e18d8bca07' }, GTM_ID: '', GA4_ID: '', PIXEL_ID: '' }, window.DDP_CONFIG || {});
+  state = {
+    loaded: false, isAdmin: false, authed: false, basic: null, reviews: [], faqs: [], details: [], leads: [],
+    sel: { model: 'main', carrier: 'SKT', net: '500' }, name: '', p1: '010', p2: '', p3: '', consent: true,
+    modal: false, faqOpen: -1, idx: 0, anim: true, ph: '', toast: '', popup: null, consentState: null,
+    tab: 'basic', leadFilter: 'ALL', searchKey: 'phone', searchVal: '', page: 0, range: 14, stats: null, statsLoading: false,
+    loginId: '', loginPw: '', loginErr: '', newId: '', newPw: '', demo: false,
+  };
+  dirty = {}; removed = { details: [], leads: [] };
+  HEAD = ['고객그룹','접수일자','판매점','(판매점)상담원ID','배송유형','고객명','고객번호','핸드폰연락처','추가 연락처','(배송)우편','배송지주소','가입통신사','가입유형','카드번호','할인유형','신청모델','단말기색상','단말기출고가','공시지원금','프리할부','할부원금','약정기간','할부기간','유효기간','유심비구분','요금상품명','이메일','카드번호','개통(이동)번호','모델일련번호','유심일련번호','부가서비스','카드이름','개통일자','진행상태','개통상태','메모추가'];
+
+  defs() {
+    return {
+      model: '갤럭시 S26', modelNote: '*이외 기종은 추가금이 발생해요!', defaultCarrier: 'SKT', planNote: '*초기 개통 요금제는 4~6개월뒤 하향이 가능해요',
+      plans: { SKT: '베스트 109 (109,000원)', KT: '베스트 109 (109,000원)', LGU: '베스트 109 (109,000원)' }, netNote: '*인터넷 + TV 갈아타는 조건 이에요',
+      privacy: '1. 수집 항목: 성명, 휴대폰 연락처, 가입 희망 조건(통신사·요금제·기종·인터넷 속도)\n2. 수집 및 이용 목적: 가입 상담 및 안내 연락\n3. 보유 및 이용 기간: 상담 완료 후 1년 또는 동의 철회 시까지\n4. 동의를 거부할 권리가 있으며, 거부 시 상담 신청이 제한됩니다.',
+      floatModel: 'NEW 갤럭시 S26', floatPrice: '기기값 0원', bubble: '한정수량 특가재고', benefit: '+ 비밀 지원금', btnText: '제휴카드 없이 상담신청', sheetId: '', preLink: '',
+      footer: { company: '주식회사 이루다', ceo: '이만년설', bizNo: '745-81-01440', addr: '전북특별자치도 전주시 완산구 홍산중앙로 18 5F', reportNo: '2020-전주완산-0012', tel: '1600-7949', rights: '주식회사 이루다' },
+    };
+  }
+  defReviews() { const t2 = 'KT 약정 끝나서 연장하려고 고객센터 전화했는\n데 추가로 할인이 들어가는 것도 없고 그래서\n기존 결합 그대로 유지하고 여기서 휴대폰까지\n0원에 지원금까지 얹어서 받았네요~'; const t = '인터넷 바꾸려고 검색하다가 여기를 알게됐어요\n요즘은 온라인을 통해서 하는게 낫다길래\n인스타그램에서 보고 들어왔다가 상담 남겨서\n받아봤는데 생각보다 크더라구요 여기저기'; return [1, 2, 3, 4].map((i) => ({ id: 'r' + i, order: i, text: i === 2 ? t2 : t, name: i === 2 ? '민*정 고객님' : '함*열 고객님', stars: 5, img: i === 2 ? 'assets/review-2.webp' : 'assets/review-1.webp' })); }
+  defFaqs() { const q = [['회선 유지기간은 어떻게 되나요?', '회선 유지기간은 상담 시 가입 조건에 따라 안내드립니다.'], ['현재 위약금을 알 수 있나요?', '현재 이용 중인 통신사 고객센터 또는 상담 시 확인해 드립니다.'], ['요금제는 언제 부터 낮출 수 있나요?', '초기 개통 요금제는 4~6개월 뒤 하향이 가능합니다.'], ['배송과 개통은 언제 되나요?', '신청 완료 후 상담을 거쳐 순차적으로 배송 및 개통됩니다.'], ['가입 절차를 알고 싶어요', '상담 신청 → 조건 안내 → 신청서 작성 → 배송 및 개통 순서로 진행됩니다.']]; return q.map((x, i) => ({ id: 'f' + (i + 1), order: i + 1, q: x[0], a: x[1] })); }
+  defDetails() { return [{ id: 'd1', order: 1, name: '당당폰의철칙.png', img: 'assets/detail-1.webp', ratio: 0.8867 }, { id: 'd2', order: 2, name: '공식인증온라인판매점.png', img: 'assets/detail-2.webp', ratio: 0.7996 }]; }
+
+  /* ---------- storage (Firestore / demo) ---------- */
+  async initFb() {
+    const c = this.cfg.firebase; if (!c.projectId) return null;
+    try { const B = 'https://www.gstatic.com/firebasejs/10.12.2/'; const app = await import(B + 'firebase-app.js'); const fs = await import(B + 'firebase-firestore.js'); return { fs, db: fs.getFirestore(app.initializeApp(c)) }; } catch (e) { console.warn('firebase init failed', e); return null; }
+  }
+  dget() { try { return JSON.parse(localStorage.getItem('ddp_demo_v1')) || {}; } catch (e) { return {}; } }
+  dset(d) { localStorage.setItem('ddp_demo_v1', JSON.stringify(d)); }
+  async list(col) {
+    if (this.fb) { const { fs, db } = this.fb; const q = col === 'leads' ? fs.query(fs.collection(db, col), fs.orderBy('createdAt', 'desc'), fs.limit(3000)) : fs.collection(db, col); return (await fs.getDocs(q)).docs.map((d) => ({ id: d.id, ...d.data() })); }
+    return Object.entries(this.dget()[col] || {}).map(([id, v]) => ({ id, ...v }));
+  }
+  async getD(col, id) { if (this.fb) { const s = await this.fb.fs.getDoc(this.fb.fs.doc(this.fb.db, col, id)); return s.exists() ? s.data() : null; } return (this.dget()[col] || {})[id] || null; }
+  async put(col, id, data) { if (this.fb) return this.fb.fs.setDoc(this.fb.fs.doc(this.fb.db, col, id), data); const d = this.dget(); d[col] = d[col] || {}; d[col][id] = data; this.dset(d); }
+  async del(col, id) { if (this.fb) return this.fb.fs.deleteDoc(this.fb.fs.doc(this.fb.db, col, id)); const d = this.dget(); if (d[col]) delete d[col][id]; this.dset(d); }
+  async sha(t) { const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(t)); return [...new Uint8Array(b)].map((x) => x.toString(16).padStart(2, '0')).join(''); }
+
+  async load() {
+    const [bs, rv, fq, dt] = await Promise.all([this.getD('settings', 'basic'), this.list('reviews'), this.list('faqs'), this.list('details')]);
+    const d = this.defs(); const basic = Object.assign({}, d, bs || {}, { plans: Object.assign({}, d.plans, (bs || {}).plans), footer: Object.assign({}, d.footer, (bs || {}).footer) });
+    const by = (a, b) => (a.order || 0) - (b.order || 0);
+    this.setState({ basic, reviews: (rv.length ? rv : this.defReviews()).sort(by), faqs: (fq.length ? fq : this.defFaqs()).sort(by), details: (dt.length ? dt : this.defDetails()).sort(by), loaded: true, demo: !this.fb, sel: Object.assign({}, this.state.sel, { carrier: basic.defaultCarrier || 'SKT' }) });
+  }
+
+  /* ---------- routing ---------- */
+  isAdminRoute() { let p = ''; try { p = (window.parent.location.href || ''); } catch (e) {} if (this.forceAdmin || sessionStorage.getItem('ddp_forceadmin') === '1' || /[#?&\/]admin\/?($|[#?&])/.test(p)) return true; return /\/admin\/?$/.test(location.pathname) || location.hash.indexOf('admin') > -1 || location.search.indexOf('admin') > -1; }
+  route() {
+    const a = this.isAdminRoute(); this.setState({ isAdmin: a, authed: a && sessionStorage.getItem('ddp_auth') === '1' });
+    if (a) { if (sessionStorage.getItem('ddp_auth') === '1') this.loadLeads(); } else this.trackPage();
+  }
+  async loadLeads() { this.setState({ leads: await this.list('leads') }); }
+
+  /* ---------- tracking ---------- */
+  initTracking() {
+    if (window.__ddpTrack) return; window.__ddpTrack = true;
+    const w = window; w.dataLayer = w.dataLayer || []; w.gtag = w.gtag || function () { w.dataLayer.push(arguments); };
+    const saved = localStorage.getItem('ddp_consent'); this.setState({ consentState: saved });
+    const g = saved === 'granted' ? 'granted' : 'denied';
+    gtag('consent', 'default', { ad_storage: g, analytics_storage: g, ad_user_data: g, ad_personalization: g, wait_for_update: 500 });
+    const { GTM_ID, GA4_ID, PIXEL_ID } = this.cfg;
+    if (GTM_ID && !w.__gtmLoaded && !document.querySelector('script[src*="googletagmanager.com/gtm.js"]')) { w.__gtmLoaded = 1; w.dataLayer.push({ 'gtm.start': Date.now(), event: 'gtm.js' }); const s = document.createElement('script'); s.async = 1; s.src = 'https://www.googletagmanager.com/gtm.js?id=' + GTM_ID; document.head.appendChild(s); }
+    else if (GA4_ID && !GTM_ID && !document.querySelector('script[src*="gtag/js"]')) { const s = document.createElement('script'); s.async = 1; s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA4_ID; document.head.appendChild(s); gtag('js', new Date()); gtag('config', GA4_ID, { send_page_view: false }); }
+    if (PIXEL_ID && !w.fbq) {
+      const n = (w.fbq = function () { n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments); }); if (!w._fbq) w._fbq = n; n.push = n; n.loaded = true; n.version = '2.0'; n.queue = [];
+      const s = document.createElement('script'); s.async = 1; s.src = 'https://connect.facebook.net/en_US/fbevents.js'; document.head.appendChild(s);
+      fbq('consent', saved === 'granted' ? 'grant' : 'revoke'); fbq('init', PIXEL_ID);
+    }
+    const q = new URLSearchParams(location.search), u = JSON.parse(sessionStorage.getItem('ddp_utm') || '{}');
+    ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'ad_id', 'adset_id', 'creative_id', 'ad_name', 'fbclid'].forEach((k) => { if (q.get(k)) u[k] = q.get(k); });
+    sessionStorage.setItem('ddp_utm', JSON.stringify(u));
+    this.sent = {}; let t = 0;
+    window.addEventListener('scroll', () => { if (this.state.isAdmin || t) return; t = setTimeout(() => { t = 0; const h = document.documentElement; const p = Math.round(((window.scrollY + window.innerHeight) / h.scrollHeight) * 100); [10, 25, 50, 75, 90, 100].forEach((m) => { if (p >= m - (m === 100 ? 1 : 0) && !this.sent[m]) { this.sent[m] = 1; this.track('scroll_' + m, { percent: m }); } }); }, 120); }, { passive: true });
+  }
+  utm() { const u = JSON.parse(sessionStorage.getItem('ddp_utm') || '{}'); u.creative = u.creative_id || u.ad_id || u.utm_content || ''; return u; }
+  uid() { return window.crypto && crypto.randomUUID ? crypto.randomUUID() : 'e' + Date.now() + Math.random().toString(16).slice(2); }
+  ck(n) { const m = document.cookie.match('(?:^|; )' + n + '=([^;]*)'); return m ? m[1] : ''; }
+  track(name, params) {
+    if (this.state.isAdmin) return; const p = Object.assign({}, this.utm(), params || {});
+    window.dataLayer.push(Object.assign({ event: name }, p));
+    if (!this.cfg.GTM_ID && this.cfg.GA4_ID && window.gtag) gtag('event', name, p);
+  }
+  meta(name, custom, eid, user) {
+    const id = eid || this.uid(); if (!this.cfg.PIXEL_ID) return id;
+    if (window.fbq) fbq('track', name, custom || {}, { eventID: id });
+    if (this.state.consentState === 'granted') { const u = this.utm(); fetch('/api/capi', { method: 'POST', keepalive: true, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(Object.assign({ event_name: name, event_id: id, url: location.href, custom, fbp: this.ck('_fbp'), fbc: this.ck('_fbc') || (u.fbclid ? 'fb.1.' + Date.now() + '.' + u.fbclid : '') }, user || {})) }).catch(() => {}); }
+    return id;
+  }
+  trackPage() { if (this.state.isAdmin) return; this.track('page_view_spa', { page_path: location.pathname + location.hash, page_title: document.title }); this.meta('PageView'); }
+  setConsent(v) {
+    localStorage.setItem('ddp_consent', v); const g = v === 'granted' ? 'granted' : 'denied';
+    gtag('consent', 'update', { ad_storage: g, analytics_storage: g, ad_user_data: g, ad_personalization: g }); if (window.fbq) fbq('consent', v === 'granted' ? 'grant' : 'revoke'); this.setState({ consentState: v });
+  }
+  observeOpts() {
+    const el = document.getElementById('opts'); if (!el || this.obs || !window.IntersectionObserver) return;
+    this.obs = new IntersectionObserver((es) => { if (es[0].isIntersecting) { this.track('view_item', { item_name: this.state.basic.model }); this.meta('ViewContent', { content_name: this.state.basic.model }); this.obs.disconnect(); } }, { threshold: 0.3 }); this.obs.observe(el);
+  }
+
+  /* ---------- lifecycle ---------- */
+  async componentDidMount() {
+    this.t0 = Date.now(); this.t3 = setInterval(() => { const el = document.getElementById('dd-timer'); if (!el) return; const L = 300000 - ((Date.now() - this.t0) % 300000), c = Math.floor(L / 10), p = (x) => String(x).padStart(2, '0'); el.textContent = '00:' + p(Math.floor(c / 6000)) + ':' + p(Math.floor(c % 6000 / 100)) + ':' + p(c % 100); }, 30);
+    this.fb = await this.initFb(); this.initTracking(); await this.load(); this.route(); setTimeout(() => this.observeOpts(), 400);
+    window.addEventListener('keydown', (e) => { if (e.ctrlKey && e.shiftKey && (e.key === 'A' || e.key === 'a')) { e.preventDefault(); const on = sessionStorage.getItem('ddp_forceadmin') !== '1'; this.forceAdmin = on; if (on) sessionStorage.setItem('ddp_forceadmin', '1'); else sessionStorage.removeItem('ddp_forceadmin'); this.route(); } });
+    window.addEventListener('hashchange', () => this.route()); window.addEventListener('popstate', () => this.route());
+    const full = '성함을 입력해 주세요'; let i = 0, hold = 0;
+    this.t1 = setInterval(() => { if (hold > 0) { hold--; return; } i++; if (i > full.length) { hold = 14; i = 0; } this.setState({ ph: full.slice(0, i) }); }, 120);
+    this.t2 = setInterval(() => {
+      const n = this.state.reviews.length; if (!n || this.state.isAdmin) return;
+      this.setState((s) => ({ idx: s.idx + 1, anim: true }), () => { if (this.state.idx >= n) setTimeout(() => this.setState({ anim: false, idx: 0 }, () => setTimeout(() => this.setState({ anim: true }), 50)), 650); });
+    }, 3800);
+  }
+  componentWillUnmount() { clearInterval(this.t1); clearInterval(this.t2); clearInterval(this.t3); }
+
+  /* ---------- helpers ---------- */
+  kst(off) { return new Date(Date.now() + 9 * 3600e3 - (off || 0) * 864e5).toISOString(); }
+  setB(path, val) { this.dirty.basic = 1; this.setState((s) => { const b = JSON.parse(JSON.stringify(s.basic)); const k = path.split('.'); let o = b; while (k.length > 1) o = o[k.shift()]; o[k[0]] = val; return { basic: b }; }); }
+  upd(col, i, key, val) { this.dirty[col] = 1; this.setState((s) => { const a = s[col].slice(); a[i] = Object.assign({}, a[i], { [key]: val }); return { [col]: a }; }); }
+  toast(m) { this.setState({ toast: m }); clearTimeout(this.tt); this.tt = setTimeout(() => this.setState({ toast: '' }), 2200); }
+  webp(file, maxW) {
+    return new Promise((res) => { const img = new Image(), u = URL.createObjectURL(file); img.onload = () => { let w = Math.min(img.width, maxW), q = 0.82, d; const c = document.createElement('canvas'); for (let n = 0; n < 8; n++) { c.width = w; c.height = Math.round((img.height * w) / img.width); c.getContext('2d').drawImage(img, 0, 0, c.width, c.height); d = c.toDataURL('image/webp', q); if (d.length < 850000) break; q = Math.max(0.4, q - 0.12); w = Math.round(w * 0.85); } URL.revokeObjectURL(u); res(d); }; img.src = u; });
+  }
+  planShort(p) { return String(p || '').replace(/\s*\(.*$/, ''); }
+  netLabel(n) { return n === '1g' ? '1G' : '500mb'; }
+  leadRow(l) { const r = new Array(37).fill(''); r[0] = '당당폰'; r[1] = l.kst; r[2] = '당당폰'; r[5] = l.name; r[7] = l.phone; r[11] = l.carrier; r[12] = '인티휴'; r[15] = l.model; r[25] = String(l.plan || '').replace(/\s/g, ''); r[36] = '인터넷+TV (' + l.internet + ')'; return r; }
+
+  /* ---------- user actions ---------- */
+  pick(k, v) { this.setState((s) => ({ sel: Object.assign({}, s.sel, { [k]: v }) })); this.track('select_option', { option: k, value: v }); }
+  focusNext(el) { const e = document.getElementById(el); if (e) e.focus(); }
+  async submit(scope) {
+    const s = this.state; if (s.submitting) return;
+    const phone = '010'.slice(0, 0) + s.p1 + '-' + s.p2 + '-' + s.p3;
+    this.track('cta_click', { label: scope === 'modal' ? '간편 상담 신청' : '상담 신청하기' });
+    if (s.name.trim().length < 2) return this.toast('성함을 입력해 주세요');
+    if (!/^01[016789]-\d{3,4}-\d{4}$/.test(phone)) return this.toast('연락처를 정확히 입력해 주세요');
+    if (!s.consent) return this.toast('개인정보 수집 이용에 동의해 주세요');
+    this.setState({ submitting: true });
+    const b = s.basic, car = { SKT: 'SKT', KT: 'KT', LGU: 'LGU+' }[s.sel.carrier], eid = this.uid();
+    const lead = { name: s.name.trim(), phone, carrier: car, plan: this.planShort(b.plans[s.sel.carrier]), model: s.sel.model === 'main' ? b.model : '이외기종', internet: this.netLabel(s.sel.net), createdAt: Date.now(), kst: this.kst().slice(0, 16).replace('T', ' '), event_id: eid, utm: this.utm(), source: location.pathname };
+    try { await this.put('leads', eid, lead); } catch (e) { this.setState({ submitting: false }); return this.toast('접수에 실패했습니다. 다시 시도해 주세요'); }
+    this.track('generate_lead', { value: 1, currency: 'KRW', carrier: car, event_id: eid }); this.track('consultation_submit', { carrier: car, plan: lead.plan, event_id: eid });
+    this.meta('Lead', { content_name: lead.model, carrier: car, plan: lead.plan }, eid, { phone, name: lead.name, external_id: eid });
+    if (b.sheetId) fetch('/api/sheets', { method: 'POST', keepalive: true, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'append', sheetId: b.sheetId, row: this.leadRow(lead) }) }).catch(() => {});
+    this.setState({ submitting: false, modal: false, name: '', p2: '', p3: '', popup: { title: '신청이 완료되었어요!', msg: '특가 재고를 바로 찾아서 전문 매니저가\n상담후 견적을 보내드릴께요', done: true, closable: true, w: '340px', align: 'center' } });
+  }
+
+  /* ---------- admin actions ---------- */
+  async doLogin() {
+    const a = await this.getD('settings', 'admin'); const id = a ? a.id : 'admin', ph = a ? a.pwHash : await this.sha('admin1234');
+    if (this.state.loginId === id && (await this.sha(this.state.loginPw)) === ph) { sessionStorage.setItem('ddp_auth', '1'); this.setState({ authed: true, loginErr: '', loginPw: '' }); this.loadLeads(); } else this.setState({ loginErr: '아이디 또는 비밀번호가 올바르지 않습니다' });
+  }
+  async save() {
+    this.setState({ popup: { title: '저장중...', msg: '서버에 저장하고 있습니다', spin: true, w: '320px', align: 'center' } }); const t0 = Date.now(), s = this.state, D = this.dirty;
+    try {
+      if (D.basic) await this.put('settings', 'basic', s.basic);
+      if (D.admin) { await this.put('settings', 'admin', D.admin); }
+      for (const col of ['reviews', 'faqs']) if (D[col]) for (const x of s[col]) { const { id, ...r } = x; await this.put(col, id, r); }
+      if (D.details) { for (const x of s.details) { const { id, ...r } = x; await this.put('details', id, r); } for (const id of this.removed.details) await this.del('details', id); }
+      for (const id of this.removed.leads) await this.del('leads', id);
+      this.dirty = {}; this.removed = { details: [], leads: [] };
+      await new Promise((r) => setTimeout(r, Math.max(0, 700 - (Date.now() - t0))));
+      this.setState({ popup: { title: '저장 완료', msg: '서버에 반영되었습니다', check: true, w: '320px', align: 'center' } }); setTimeout(() => this.setState((x) => (x.popup && x.popup.check ? { popup: null } : null)), 1400);
+    } catch (e) { this.setState({ popup: { title: '저장 실패', msg: String(e.message || e), closable: true, w: '360px', align: 'center' } }); }
+  }
+  async connectSheet() {
+    const id = this.state.basic.sheetId; if (!id) return this.setState({ popup: { title: '알림', msg: '스프레드시트 ID 또는 URL을 입력해 주세요', closable: true, w: '340px', align: 'center' } });
+    this.setState({ popup: { title: '연동중...', msg: '', spin: true, w: '320px', align: 'center' } });
+    try { const r = await (await fetch('/api/sheets', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'init', sheetId: id, header: this.HEAD }) })).json(); this.dirty.basic = 1;
+      this.setState({ popup: r.ok ? { title: '연동 완료', msg: '이후 접수 건이 실시간으로 시트에 입력됩니다.\n(저장하기를 눌러 설정을 저장하세요)', check: true, closable: true, w: '360px', align: 'center' } : { title: '연동 실패', msg: r.error || '서비스계정 공유 및 서버 환경변수를 확인하세요', closable: true, w: '360px', align: 'center' } });
+    } catch (e) { this.setState({ popup: { title: '연동 실패', msg: '/api/sheets 에 연결할 수 없습니다 (Vercel 배포 후 사용 가능)', closable: true, w: '360px', align: 'center' } }); }
+  }
+  async changeAdmin() {
+    const s = this.state; if (!s.newId || s.newPw.length < 4) return this.setState({ popup: { title: '알림', msg: '아이디와 4자 이상의 비밀번호를 입력해 주세요', closable: true, w: '340px', align: 'center' } });
+    this.dirty.admin = { id: s.newId, pwHash: await this.sha(s.newPw) };
+    this.setState({ newPw: '', popup: { title: '변경 대기', msg: '저장하기를 누르면 새 계정으로 반영됩니다.', closable: true, w: '340px', align: 'center' } });
+  }
+  async xlsx() {
+    const rows = this.filtered().map((l) => this.leadRow(l)); const name = '당당폰_접수내역_' + this.kst().slice(0, 10).replace(/-/g, '') ;
+    try {
+      if (!window.XLSX) await new Promise((ok, no) => { const s = document.createElement('script'); s.src = 'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js'; s.onload = ok; s.onerror = no; document.head.appendChild(s); });
+      const ws = XLSX.utils.aoa_to_sheet([this.HEAD, ...rows]); const wb = XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb, ws, 'Sheet1'); XLSX.writeFile(wb, name + '.xlsx');
+    } catch (e) {
+      const csv = '\ufeff' + [this.HEAD, ...rows].map((r) => r.map((c) => '"' + String(c).replace(/"/g, '""') + '"').join(',')).join('\r\n'); const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' })); a.download = name + '.csv'; a.click();
+    }
+  }
+  filtered() {
+    const s = this.state, v = s.searchVal.trim(); return s.leads.filter((l) => (s.leadFilter === 'ALL' || l.carrier === s.leadFilter) && (!v || String(l[s.searchKey] || '').indexOf(v) > -1));
+  }
+  getRange() { const s = this.state; return { from: s.from || this.kst(13).slice(0, 10), to: s.to || this.kst(0).slice(0, 10) }; }
+  setRange(from, to) { if (!from || !to || from > to) return; this.setState({ from, to }, () => this.loadStats()); }
+  async loadStats() {
+    this.setState({ statsLoading: true }); const { from, to } = this.getRange(), q = '?start=' + from + '&end=' + to, get = async (u) => { const r = await fetch(u); if (!r.ok) throw 0; return r.json(); };
+    const ds = [], e = new Date(to + 'T00:00:00Z'); for (let d = new Date(from + 'T00:00:00Z'); d <= e && ds.length < 366; d = new Date(d.getTime() + 864e5)) ds.push(d.toISOString().slice(0, 10).replace(/-/g, ''));
+    let [ga, mt] = await Promise.all([get('/api/ga-stats' + q).catch(() => null), get('/api/meta-stats' + q).catch(() => null)]);
+    const gaLive = !!ga, mLive = !!mt; if (!ga) ga = this.demoGa(ds); if (!mt) mt = this.demoMeta(ds);
+    this.setState({ stats: ga, meta: mt, gaLive, mLive, statsNote: '', statsLoading: false });
+  }
+  demoGa(ds) {
+    const d = [], hours = [], R = (i, m) => (i * 37 + m) % 90;
+    ds.forEach((date, i) => { const sn = 120 + R(i, 0); d.push({ date, sessions: sn, pageviews: Math.round(sn * 1.4), users: Math.round(sn * 0.85) }); });
+    for (let h = 0; h < 24; h++) hours.push({ hour: h, sessions: Math.round(40 + 160 * Math.max(0, Math.sin((h - 6) / 24 * Math.PI * 2 * 0.9)) + (h * 13) % 25) });
+    return { demo: 1, daily: d, sources: [{ source: 'facebook', medium: 'paid_social', sessions: 1480 }, { source: 'instagram', medium: 'paid_social', sessions: 920 }, { source: 'naver', medium: 'organic', sessions: 340 }, { source: '(direct)', medium: '(none)', sessions: 210 }],
+      events: [{ name: 'page_view', count: 3100 }, { name: 'scroll_10', count: 2400 }, { name: 'scroll_25', count: 2100 }, { name: 'scroll_50', count: 1600 }, { name: 'scroll_75', count: 1100 }, { name: 'scroll_90', count: 760 }, { name: 'scroll_100', count: 540 }, { name: 'view_item', count: 1500 }, { name: 'cta_click', count: 880 }, { name: 'generate_lead', count: 190 }],
+      campaigns: [{ campaign: 'meta_s26', content: 'creative_A', sessions: 900 }, { campaign: 'meta_s26', content: 'creative_B', sessions: 640 }, { campaign: 'meta_s26', content: 'creative_C', sessions: 410 }],
+      devices: [{ device: 'mobile', sessions: 2480 }, { device: 'desktop', sessions: 360 }, { device: 'tablet', sessions: 90 }],
+      regions: [{ region: 'Seoul', sessions: 720 }, { region: 'Gyeonggi-do', sessions: 690 }, { region: 'Busan', sessions: 260 }, { region: 'Incheon', sessions: 210 }, { region: 'Daegu', sessions: 150 }],
+      hours, newret: [{ type: 'new', sessions: 2100 }, { type: 'returning', sessions: 830 }],
+      channels: [{ channel: 'Paid Social', sessions: 2400 }, { channel: 'Organic Search', sessions: 340 }, { channel: 'Direct', sessions: 210 }, { channel: 'Referral', sessions: 60 }],
+      pages: [{ path: '/', views: 4100 }, { path: '/?utm_source=facebook', views: 900 }],
+      genders: [{ gender: 'female', sessions: 1620 }, { gender: 'male', sessions: 1180 }, { gender: 'unknown', sessions: 130 }], os: [{ os: 'Android', sessions: 1710 }, { os: 'iOS', sessions: 770 }, { os: 'Windows', sessions: 330 }, { os: 'Macintosh', sessions: 60 }], ages: [{ age: '18-24', sessions: 380 }, { age: '25-34', sessions: 920 }, { age: '35-44', sessions: 740 }, { age: '45-54', sessions: 410 }, { age: '55-64', sessions: 190 }],
+      totals: { avgDur: 74, engRate: 0.62, bounce: 0.38 } };
+  }
+  demoMeta(ds) {
+    const d = []; let sp = 0, im = 0, cl = 0, ld = 0;
+    ds.forEach((date, i) => { const spend = 90000 + ((i * 53) % 60) * 1000, imp = Math.round(spend / 6.2), clk = Math.round(imp * 0.021), lead = Math.round(clk * 0.06); sp += spend; im += imp; cl += clk; ld += lead; d.push({ date, spend, impressions: imp, clicks: clk, leads: lead }); });
+    return { demo: 1, summary: { spend: sp, impressions: im, reach: Math.round(im * 0.62), clicks: cl, ctr: cl / im * 100, cpc: sp / cl, cpm: sp / im * 1000, frequency: 1.6, leads: ld }, daily: d,
+      campaigns: [{ name: 'meta_s26 · 상담신청', spend: sp * 0.55, impressions: im * 0.5, clicks: cl * 0.55, leads: Math.round(ld * 0.6) }, { name: 'meta_s26 · 리타겟', spend: sp * 0.3, impressions: im * 0.3, clicks: cl * 0.3, leads: Math.round(ld * 0.28) }, { name: 'meta_s26 · 트래픽', spend: sp * 0.15, impressions: im * 0.2, clicks: cl * 0.15, leads: Math.round(ld * 0.12) }],
+      demographics: [['18-24', 'female', .06], ['18-24', 'male', .05], ['25-34', 'female', .17], ['25-34', 'male', .15], ['35-44', 'female', .14], ['35-44', 'male', .12], ['45-54', 'female', .09], ['45-54', 'male', .07], ['55-64', 'female', .05], ['55-64', 'male', .04]].map((x) => ({ age: x[0], gender: x[1], spend: sp * x[2], leads: Math.round(ld * x[2]) })),
+      platforms: [{ name: 'Instagram', spend: sp * 0.52 }, { name: 'Facebook', spend: sp * 0.4 }, { name: 'Audience Network', spend: sp * 0.08 }],
+      actions: [{ name: 'landing_page_view', count: Math.round(cl * 0.82) }, { name: 'ViewContent', count: Math.round(cl * 0.7) }, { name: 'InitiateCheckout', count: Math.round(cl * 0.2) }, { name: 'Lead', count: ld }] };
+  }
+  dash() {
+    const s = this.state, st = s.stats, mt = s.meta; if (!st) return {};
+    const F = (n) => Math.round(n || 0).toLocaleString(), W = (n) => '₩' + F(n), mx = (a) => Math.max(1, ...a), sum = (a) => a.reduce((x, y) => x + y, 0);
+    const C = ['#4f46c8', '#f58a54', '#9a94e8', '#f8c4a4', '#2f2a8f', '#d9d6f7'];
+    const ev = {}; st.events.forEach((e) => (ev[e.name] = e.count));
+    const dl = st.daily, days = {}; s.leads.forEach((l) => { const k = String(l.kst || '').slice(0, 10).replace(/-/g, ''); days[k] = (days[k] || 0) + 1; });
+    const sess = sum(dl.map((d) => d.sessions)), usr = sum(dl.map((d) => d.users)), pv = sum(dl.map((d) => d.pageviews)), lead = ev.generate_lead || sum(Object.values(days));
+    const dt = (arr) => { const h = Math.floor(arr.length / 2), a = sum(arr.slice(0, h)), b = sum(arr.slice(h)); if (!a) return { dt: '', dc: '#8b8ab0' }; const p = (b - a) / a * 100; return { dt: (p >= 0 ? '▲ ' : '▼ ') + Math.abs(p).toFixed(1) + '% 전반기 대비', dc: p >= 0 ? '#1fa971' : '#e5484d' }; };
+    const K = (label, value, x) => Object.assign({ label, value, dt: '', dc: '#8b8ab0' }, x || {});
+    const t = st.totals || {}, dur = t.avgDur || 0;
+    const kpis = [K('세션', F(sess), dt(dl.map((d) => d.sessions))), K('사용자', F(usr), dt(dl.map((d) => d.users))), K('페이지뷰', F(pv), dt(dl.map((d) => d.pageviews))), K('상담 신청', F(lead)), K('전환율', (sess ? lead / sess * 100 : 0).toFixed(1) + '%'), K('평균 참여시간', Math.floor(dur / 60) + '분 ' + Math.round(dur % 60) + '초'), K('참여율', ((t.engRate || 0) * 100).toFixed(1) + '%'), K('이탈률', ((t.bounce || 0) * 100).toFixed(1) + '%')];
+    const line = (series, labels) => {
+      const n = labels.length, m0 = Math.max(1, ...series[0].v);
+      const paths = series.map((x, k) => { const m = mx(x.v), pts = x.v.map((v, i) => [n > 1 ? i * 600 / (n - 1) : 0, 10 + (1 - v / m) * 180]); let d = 'M' + pts[0][0] + ',' + pts[0][1]; for (let i = 1; i < pts.length; i++) { const a = pts[i - 1], b = pts[i], cx = (a[0] + b[0]) / 2; d += ' C' + cx + ',' + a[1] + ' ' + cx + ',' + b[1] + ' ' + b[0] + ',' + b[1]; } return { d, area: k === 0 ? d + ' L600,200 L0,200 Z' : 'M0,0', ls: 'fill:none;stroke:' + x.c + ';stroke-width:2.5;vector-effect:non-scaling-stroke', as: 'fill:' + x.c + ';opacity:.12;stroke:none' }; });
+      const grid = [0, 1, 2, 3, 4].map((i) => ({ top: (10 + i * 45) / 2 + '%', label: F(m0 * (1 - i / 4)) }));
+      const xl = [0, 1, 2, 3, 4, 5].map((i) => labels[Math.round(i * (n - 1) / 5)] || '');
+      return { paths, grid, xl };
+    };
+    const lab = (d) => d.date.slice(4, 6) + '.' + d.date.slice(6);
+    const gaChart = line([{ v: dl.map((d) => d.sessions), c: C[0] }, { v: dl.map((d) => days[d.date] || 0), c: C[1] }], dl.map(lab));
+    const donut = (items, center) => { const tt = sum(items.map((x) => x.v)) || 1; let acc = 0; const stops = items.map((x, i) => { const a = acc / tt * 100; acc += x.v; return C[i % 6] + ' ' + a + '% ' + acc / tt * 100 + '%'; }); return { bg: 'conic-gradient(' + (stops.join(',') || '#eceafc 0 100%') + ')', center, legend: items.map((x, i) => ({ name: x.name, pct: Math.round(x.v / tt * 100) + '%', style: 'background:' + C[i % 6] })) }; };
+    const DV = { mobile: '모바일', desktop: '데스크톱', tablet: '태블릿' };
+    const devDonut = donut((st.devices || []).map((x) => ({ name: DV[x.device] || x.device, v: x.sessions })), '기기');
+    const nrDonut = donut((st.newret || []).map((x) => ({ name: x.type === 'new' ? '신규' : x.type === 'returning' ? '재방문' : x.type, v: x.sessions })), '사용자');
+    const bl = (items, fmt) => { const m = mx(items.map((x) => x.v)); return items.map((x, i) => ({ name: x.name, v: (fmt || F)(x.v), w: Math.round(x.v / m * 100) + '%', c: C[i % 2 ? 2 : 0] })); };
+    const SP = [10, 25, 50, 75, 90, 100].map((p) => ({ name: p + '%', v: ev['scroll_' + p] || 0 }));
+    const scrollRows = bl(SP);
+    const fs = [['방문 (page_view)', ev.page_view || sess], ['콘텐츠 조회 (view_item)', ev.view_item || 0], ['상담 버튼 클릭 (cta_click)', ev.cta_click || 0], ['상담 신청 (generate_lead)', lead]], f0 = mx([fs[0][1]]);
+    const funnel = fs.map((x, i) => ({ label: x[0], count: F(x[1]), pct: Math.round(x[1] / f0 * 100) + '%', w: Math.max(2, Math.round(x[1] / f0 * 100)) + '%', c: C[i === 3 ? 1 : 0] }));
+    const chRows = bl((st.channels || []).map((x) => ({ name: x.channel, v: x.sessions })));
+    const hr = new Array(24).fill(0); (st.hours || []).forEach((x) => (hr[+x.hour] = x.sessions)); const hm = mx(hr);
+    const hourCols = hr.map((v, h) => ({ h: Math.max(3, Math.round(v / hm * 100)) + '%', c: v === Math.max(...hr) ? C[1] : C[2], l: h % 3 === 0 ? h : '' }));
+    const dw = new Array(7).fill(0); dl.forEach((d) => { dw[new Date(+d.date.slice(0, 4), +d.date.slice(4, 6) - 1, +d.date.slice(6)).getDay()] += d.sessions; }); const dm = Math.max(...dw, 1);
+    const dowCols = dw.map((v, i) => ({ h: Math.max(3, Math.round(v / dm * 100)) + '%', c: v === dm ? C[1] : C[0], l: '일월화수목금토'[i] }));
+    const regRows = bl((st.regions || []).slice(0, 6).map((x) => ({ name: x.region, v: x.sessions })));
+    const pageRows = bl((st.pages || []).slice(0, 6).map((x) => ({ name: x.path, v: x.views })));
+    const evRows = bl(st.events.filter((e) => !/^scroll_/.test(e.name)).slice(0, 6).map((e) => ({ name: e.name, v: e.count })));
+    const srcRows = bl(st.sources.slice(0, 6).map((r) => ({ name: r.source + ' / ' + r.medium, v: r.sessions })));
+    const cmpRows = bl(st.campaigns.slice(0, 6).map((r) => ({ name: r.campaign + ' · ' + r.content, v: r.sessions })));
+    const m = mt.summary, md = mt.daily, ml = m.leads || sum(md.map((d) => d.leads));
+    const mKpis = [K('광고비', W(m.spend), dt(md.map((d) => d.spend))), K('노출수', F(m.impressions)), K('도달', F(m.reach)), K('링크 클릭', F(m.clicks), dt(md.map((d) => d.clicks))), K('CTR', (+m.ctr || 0).toFixed(2) + '%'), K('CPC', W(m.cpc)), K('리드', F(ml), dt(md.map((d) => d.leads))), K('리드당 비용', ml ? W(m.spend / ml) : '-')];
+    const mChart = line([{ v: md.map((d) => d.spend), c: C[0] }, { v: md.map((d) => d.leads), c: C[1] }], md.map(lab));
+    const plDonut = donut((mt.platforms || []).map((x) => ({ name: x.name, v: x.spend })), '게재');
+    const mCamp = (mt.campaigns || []).map((r) => ({ name: r.name, spend: W(r.spend), clicks: F(r.clicks), leads: F(r.leads), cpl: r.leads ? W(r.spend / r.leads) : '-' }));
+    const pxRows = bl((mt.actions || []).map((x) => ({ name: x.name, v: x.count })));
+    const gl = !!s.gaLive, ml2 = !!s.mLive, cfg = this.cfg, on = 'background:#1fa971', off = 'background:#c9c8e6';
+    const conn = [
+      { name: 'GA4 수집 태그', ok: !!(cfg.GA4_ID || cfg.GTM_ID), note: cfg.GA4_ID || cfg.GTM_ID || 'GA4_ID / GTM_ID 설정 필요' },
+      { name: 'GA4 Data API', ok: gl, note: gl ? '실데이터 수신 중' : 'GA4_PROPERTY_ID, GOOGLE_SERVICE_ACCOUNT_JSON' },
+      { name: 'Meta 픽셀', ok: !!cfg.PIXEL_ID, note: cfg.PIXEL_ID || 'PIXEL_ID 설정 필요' },
+      { name: 'Conversions API', ok: !!cfg.PIXEL_ID, note: '/api/capi · META_CAPI_TOKEN' },
+      { name: 'Meta Marketing API', ok: ml2, note: ml2 ? '실데이터 수신 중' : 'META_ACCESS_TOKEN, META_AD_ACCOUNT_ID' },
+    ].map((c) => Object.assign(c, { dot: c.ok ? on : off }));
+    const GN = { male: '남성', female: '여성', unknown: '미확인' };
+    const genDonut = donut((st.genders || []).map((x) => ({ name: GN[x.gender] || x.gender, v: x.sessions })), '성별');
+    const osDonut = donut((st.os || []).slice(0, 5).map((x) => ({ name: x.os, v: x.sessions })), 'OS');
+    const ageRows = bl((st.ages || []).filter((x) => x.age !== 'unknown').map((x) => ({ name: x.age, v: x.sessions })));
+    const dmg = mt.demographics || [], agg = (k, v) => { const o = {}; dmg.forEach((x) => { o[x[k]] = (o[x[k]] || 0) + x[v]; }); return Object.keys(o).sort().map((n) => ({ name: n, v: o[n] })); };
+    const mGenDonut = donut(agg('gender', 'leads').map((x) => ({ name: GN[x.name] || x.name, v: x.v })), '리드');
+    const mAgeRows = bl(agg('age', 'leads')), mAgeSpend = bl(agg('age', 'spend'), W);
+    return { showGa: gl, noGa: !gl, showMeta: ml2, noMeta: !ml2, genDonut, osDonut, ageRows, mGenDonut, mAgeRows, mAgeSpend, kpis, gaChart, gaLegend: [{ name: '세션', style: 'background:' + C[0] }, { name: '상담신청', style: 'background:' + C[1] }], devDonut, nrDonut, funnel, scrollRows, chRows, hourCols, dowCols, regRows, pageRows, evRows, srcRows, cmpRows, mKpis, mChart, mLegend: [{ name: '광고비', style: 'background:' + C[0] }, { name: '리드', style: 'background:' + C[1] }], plDonut, mCamp, pxRows, conn };
+  }
+
+  renderVals() {
+    const s = this.state, b = s.basic || this.defs(), I = this;
+    const showUser = s.loaded && !s.isAdmin, hs = s.loaded;
+    const cs = (on) => 'position:relative;width:100%;min-height:58px;padding:10px 6px;border-radius:12px;cursor:pointer;' + (on ? 'border:2px solid #1a5cff;background:#e4edff;color:#1a5cff' : 'border:2px solid #d8dce3;background:#fff;color:#6b7280');
+    const LG = { SKT: ['T', 'color:#1a5cff;font-weight:900;font-size:20px'], KT: ['kt', 'color:#111;font-weight:900;font-size:19px'], LGU: ['U+', 'color:#e6007e;font-weight:900;font-size:18px'] }, NM = { SKT: 'SKT', KT: 'KT', LGU: 'LGU+' };
+    const copt = (k) => ({ label: NM[k], logo: LG[k][0], logoStyle: LG[k][1], hasLogo: true, hasBadge: false, hasSub: false, hasTag: false, style: cs(s.sel.carrier === k), click: () => I.pick('carrier', k) });
+    const groups = [
+      { title: '휴대폰 기종', note: b.modelNote, grid: 'display:grid;grid-template-columns:1fr 1fr;gap:8px', options: [{ label: b.model, badge: '특가', hasBadge: true, hasLogo: false, hasSub: false, hasTag: false, style: cs(s.sel.model === 'main'), click: () => I.pick('model', 'main') }, { label: '이외기종', hasBadge: false, hasLogo: false, hasSub: false, hasTag: false, style: cs(s.sel.model === 'other'), click: () => I.pick('model', 'other') }] },
+      { title: '통신사 선택', note: '', grid: 'display:grid;grid-template-columns:repeat(3,1fr);gap:8px', options: ['SKT', 'KT', 'LGU'].map(copt) },
+      { title: '요금제', note: b.planNote, grid: 'display:grid;grid-template-columns:1fr', options: [{ label: NM[s.sel.carrier] + '  ' + b.plans[s.sel.carrier], logo: LG[s.sel.carrier][0], logoStyle: LG[s.sel.carrier][1], hasLogo: true, badge: '필수', hasBadge: true, hasSub: false, hasTag: false, style: cs(true), click: () => {} }] },
+      { title: '인터넷 속도', note: b.netNote, grid: 'display:grid;grid-template-columns:1fr 1fr;gap:8px', options: [{ label: '500 mb/s', sub: '동영상 . 게임 원활', hasSub: true, tag: '가성비 인기', hasTag: true, hasBadge: false, hasLogo: false, style: cs(s.sel.net === '500') + ';margin-top:6px', click: () => I.pick('net', '500') }, { label: '1 G/s', sub: '초고속 . 대용량', hasSub: true, hasTag: false, hasBadge: false, hasLogo: false, style: cs(s.sel.net === '1g') + ';margin-top:6px', click: () => I.pick('net', '1g') }] },
+    ];
+    const n = s.reviews.length, slides = s.reviews.concat(s.reviews.slice(0, 2));
+    const stars = (k) => '★★★★★'.slice(0, Math.max(0, Math.min(5, k))) + '☆☆☆☆☆'.slice(0, 5 - Math.max(0, Math.min(5, k)));
+    const dt = (i) => I.kst(i).slice(0, 10).replace(/-/g, '.');
+    const rvv = (r, i) => ({ imgStyle: r.img ? 'aspect-ratio:4/3;background:#ddd url(' + r.img + ') center/cover' : 'aspect-ratio:4/3;background:#e9edf2;display:flex;align-items:center;justify-content:center;color:#9aa3af;font-size:13px', imgText: r.img ? '' : '후기 사진', stars: stars(+r.stars), date: dt(i % Math.max(n, 1)), text: r.text, name: r.name, initial: String(r.name || '고').charAt(0) });
+    const detailImgs = s.details.filter((d) => d.img).map((d) => Object.assign({}, d, { bg: 'width:100%;aspect-ratio:1/' + (d.ratio || 1) + ';background:url(' + d.img + ') center/100% 100% no-repeat' }));
+    const tabsDef = [['basic', '기본 설정'], ['detail', '상세 페이지 설정'], ['review', '리뷰 설정'], ['faq', '자주묻는질문 설정'], ['stats', '통계보기'], ['leads', '접수내역'], ['admin', '관리자 설정']];
+    const T = { basic: ['기본설정', ''], detail: ['상세페이지 설정', ''], review: ['리뷰설정', '리뷰 날짜는 실시간 한국시간 당일기준으로 뒤순서로 갈수록 " -1일 되어 자동 표기됩니다 "'], faq: ['자주묻는질문 설정', ''], stats: ['통계보기', ''], leads: ['접수내역', ''], admin: ['관리자 설정', ''] }[s.tab];
+    const h = (p) => (e) => I.setB(p, e.target.value);
+    const on = { model: h('model'), modelNote: h('modelNote'), planNote: h('planNote'), pSKT: h('plans.SKT'), pKT: h('plans.KT'), pLGU: h('plans.LGU'), netNote: h('netNote'), privacy: h('privacy'), floatModel: h('floatModel'), floatPrice: h('floatPrice'), bubble: h('bubble'), benefit: h('benefit'), btnText: h('btnText'), sheetId: h('sheetId'), preLink: h('preLink'), fCompany: h('footer.company'), fCeo: h('footer.ceo'), fBiz: h('footer.bizNo'), fAddr: h('footer.addr'), fReport: h('footer.reportNo'), fTel: h('footer.tel'), fRights: h('footer.rights') };
+    const mv = (from, to) => { if (from == null || from === to) return; const a = s.details.slice(); const [x] = a.splice(from, 1); a.splice(to, 0, x); I.dirty.details = 1; I.setState({ details: a.map((d, i) => Object.assign({}, d, { order: i + 1 })) }); };
+    const flt = s.isAdmin && s.authed ? I.filtered() : [], PS = 50, pages = Math.max(1, Math.ceil(flt.length / PS)), pg = Math.min(s.page, pages - 1);
+    const cnt = (c) => s.leads.filter((l) => c === 'ALL' || l.carrier === c).length;
+    const st = s.stats, mx = (a) => Math.max(1, ...a);
+    const D = s.tab === 'stats' && s.stats ? I.dash() : {};
+    const BLU = '#0049ff', bs = (on) => (on ? 'background:#e1edff;border:1.5px solid #226cff;' : 'background:#fff;border:1.5px solid #c4c4c4;');
+    const LGS = { SKT: ['logo-skt', 16.8, 17.8, 10], KT: ['logo-kt', 21.8, 17.8, 14.7], LGU: ['logo-lgu', 23.3, 20.5, 8.4] };
+    const lgs = (k, mr) => 'display:block;flex:none;width:' + LGS[k][1] + 'px;height:' + LGS[k][2] + 'px;background:url(assets/' + LGS[k][0] + '.png) center/contain no-repeat;margin-right:' + mr + 'px';
+    const models = [{ label: b.model, hasBadge: true, on: s.sel.model === 'main', v: 'main' }, { label: '이외기종', hasBadge: false, on: s.sel.model === 'other', v: 'other' }].map((o) => ({ label: o.label, hasBadge: o.hasBadge, bs: bs(o.on), c: o.on ? BLU : '#848484', click: () => I.pick('model', o.v) }));
+    const carriers = ['SKT', 'KT', 'LGU'].map((k) => ({ label: NM[k], bs: bs(s.sel.carrier === k), c: s.sel.carrier === k ? BLU : '#333', ls: lgs(k, LGS[k][3]), click: () => I.pick('carrier', k) }));
+    const pm = (b.plans[s.sel.carrier] || '').match(/^(.*?)\s*(\(.*)?$/);
+    const nets = [{ label: '500 mb/s', sub: '동영상 . 게임 원활', hasTag: true, on: s.sel.net === '500', v: '500' }, { label: '1 G/s', sub: '초고속 . 대용량', hasTag: false, on: s.sel.net === '1g', v: '1g' }].map((o) => ({ label: o.label, sub: o.sub, hasTag: o.hasTag, bs: bs(o.on), c: o.on ? BLU : '#848484', sc: o.on ? BLU : '#a8a8a8', click: () => I.pick('net', o.v) }));
+    const popup = s.popup && Object.assign({ w: '340px', align: 'center' }, s.popup, (s.popup.done ? { tsize: '25px', msize: '14.5px', mweight: 500, mcolor: '#333' } : { tsize: '19px', msize: '14px', mweight: 400, mcolor: '#555' }));
+    const fw = (fn) => (e) => { fn(e.target.value); };
+    return {
+      timeLeft: (() => { const d = 900 - (Math.floor((Date.now() - (this.t0 || Date.now())) / 1000) % 900), p = (x) => String(x).padStart(2, '0'); return p(Math.floor(d / 60)) + '분 ' + p(d % 60) + '초'; })(),
+      showSplash: !hs, showUser, models, carriers, nets, planLs: lgs(s.sel.carrier, 0), planLabel: NM[s.sel.carrier], planName: b.plans[s.sel.carrier], nameEmpty: !s.name, p2Empty: !s.p2, p3Empty: !s.p3, cbStyle: s.consent ? 'background:#0049ff;color:#fff;font-size:10px;font-weight:700' : 'background:#fff;border:1px solid #bbb;color:#fff', cbMark: s.consent ? '✓' : '', toggleConsent: () => I.setState({ consent: !s.consent }), showAdminLogin: hs && s.isAdmin && !s.authed, showAdmin: hs && s.isAdmin && s.authed, b, f: b.footer || {}, popup, groups,
+      name: s.name, ph: s.ph, p1: s.p1, p2: s.p2, p3: s.p3, consent: s.consent, modal: s.modal, toast: s.toast, heroBtn: '상담 신청하기',
+      onName: fw((v) => I.setState({ name: v })), onP1: fw((v) => I.setState({ p1: v.replace(/\D/g, '') })),
+      onP2h: fw((v) => { v = v.replace(/\D/g, ''); I.setState({ p2: v }); if (v.length >= 4) I.focusNext('h-p3'); }), onP2m: fw((v) => { v = v.replace(/\D/g, ''); I.setState({ p2: v }); if (v.length >= 4) I.focusNext('m-p3'); }), onP3: fw((v) => I.setState({ p3: v.replace(/\D/g, '') })),
+      onConsent: (e) => I.setState({ consent: e.target.checked }),
+      openPrivacy: (e) => { e.preventDefault(); I.setState({ popup: { title: '개인정보 수집 이용', msg: b.privacy, closable: true, w: '380px', align: 'left' } }); },
+      closePopup: () => I.setState({ popup: null }),
+      submitHero: () => I.submit('hero'), submitModal: () => I.submit('modal'),
+      openModal: () => { I.track('cta_click', { label: 'floating' }); I.setState({ modal: true }); }, closeModal: () => I.setState({ modal: false }), stop: (e) => e.stopPropagation(),
+      openPre: () => { let u = (b.preLink || '').trim(); if (!u) return; if (!/^https?:\/\//i.test(u)) u = 'https://' + u; window.open(u, '_blank', 'noopener'); },
+      showConsentBar: !s.consentState, consentYes: () => I.setConsent('granted'), consentNo: () => I.setConsent('denied'),
+      trackStyle: 'display:flex;gap:15px;padding-left:18px;width:max-content;transition:' + (s.anim ? 'transform .6s ease' : 'none') + ';transform:translateX(' + -s.idx * 205.3 + 'px)',
+      revSlides: slides.map((r, i) => Object.assign(rvv(r, i), { imgStyle: r.img ? 'height:111.3px;background:#ddd url("' + r.img + '") center/cover' : 'height:111.3px;background:#e9edf2;display:flex;align-items:center;justify-content:center;color:#9aa3af;font-size:12px', av: 'width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9.4px;font-weight:600;' + (String(r.name).charAt(0) === '민' ? 'background:#ffe9e0;color:#ff3c00' : 'background:#e6efff;color:#0055ff') })),
+      tStart: (e) => { I.tx = e.touches[0].clientX; }, tEnd: (e) => { const d = e.changedTouches[0].clientX - I.tx; if (Math.abs(d) < 40) return; I.setState((x) => ({ idx: d < 0 ? x.idx + 1 : Math.max(0, x.idx - 1), anim: true })); },
+      faqList: s.faqs.map((f, i) => ({ q: f.q, a: f.a, open: s.faqOpen === i, arrow: 'display:flex;transition:transform .2s;transform:rotate(' + (s.faqOpen === i ? 180 : 0) + 'deg)', toggle: () => I.setState({ faqOpen: s.faqOpen === i ? -1 : i }) })),
+      detailImgs, hasDetail: detailImgs.length > 0, noDetail: detailImgs.length === 0,
+      /* admin */
+      loginId: s.loginId, loginPw: s.loginPw, loginErr: s.loginErr, onLoginId: fw((v) => I.setState({ loginId: v })), onLoginPw: fw((v) => I.setState({ loginPw: v })), loginKey: (e) => { if (e.key === 'Enter') I.doLogin(); }, doLogin: () => I.doLogin(),
+      logout: () => { sessionStorage.removeItem('ddp_auth'); I.setState({ authed: false }); },
+      tabs: tabsDef.map((t) => ({ label: t[1], style: 'height:44.6px;box-sizing:border-box;display:flex;align-items:center;padding:0 21px;margin-bottom:14.4px;border-radius:12px;font-size:19px;font-weight:600;color:#1c1c1c;cursor:pointer;' + (s.tab === t[0] ? 'background:#fff;box-shadow:0 2px 10px rgba(60,120,200,.12)' : ''), click: () => { I.setState({ tab: t[0] }); if (t[0] === 'stats' && !I.state.stats) I.loadStats(); if (t[0] === 'leads') I.loadLeads(); } })),
+      tabTitle: T[0], tabHint: T[1], demoMode: s.demo, canSave: s.tab !== 'stats', save: () => I.save(),
+      tabBasic: s.tab === 'basic', tabDetail: s.tab === 'detail', tabReview: s.tab === 'review', tabFaq: s.tab === 'faq', tabStats: s.tab === 'stats', tabLeads: s.tab === 'leads', tabAdmin: s.tab === 'admin',
+      lb: 'font-size:17.8px;font-weight:600;line-height:22px;margin-bottom:8px;color:#1c1c1c', inp: 'width:100%;height:38px;border:0;border-radius:6px;background:#f2f5f8;padding:0 9px;font-size:15.5px;font-weight:400;outline:none;color:#2d2d2d;font-family:inherit;box-sizing:border-box',
+      on, carrierRadios: ['SKT', 'KT', 'LGU'].map((k) => ({ label: NM[k], on: b.defaultCarrier === k, dot: 'width:22px;height:22px;border-radius:50%;box-sizing:border-box;border:6px solid ' + (b.defaultCarrier === k ? '#1a5cff' : '#c8d6ee'), click: () => I.setB('defaultCarrier', k) })),
+      addDetail: () => { I.dirty.details = 1; I.setState((x) => ({ details: x.details.concat([{ id: 'd' + Date.now(), order: x.details.length + 1, name: '새 이미지', img: '' }]) })); },
+      detailRows: s.details.map((d, i) => ({ n: i + 1, name: d.name, attachLabel: d.img ? '교체하기' : '첨부하기', rename: fw((v) => I.upd('details', i, 'name', v)), attach: async (e) => { const f = e.target.files[0]; if (!f) return; const img = await I.webp(f, 1080); const ratio = await new Promise((r) => { const m = new Image(); m.onload = () => r(+(m.height / m.width).toFixed(4)); m.src = img; }); I.dirty.details = 1; I.setState((x) => { const a = x.details.slice(); a[i] = Object.assign({}, a[i], { img, ratio, name: d.name.indexOf('새 이미지') === 0 ? f.name.replace(/\.\w+$/, '') + '.webp' : d.name }); return { details: a }; }); }, del: () => { I.removed.details.push(d.id); I.dirty.details = 1; I.setState((x) => ({ details: x.details.filter((_, k) => k !== i).map((y, k) => Object.assign({}, y, { order: k + 1 })) })); }, ds: () => { I.dragI = i; }, dov: (e) => e.preventDefault(), drop: (e) => { e.preventDefault(); mv(I.dragI, i); } })),
+      rvRows: s.reviews.map((r, i) => Object.assign(rvv(r, i), { starsN: String(r.stars), setText: fw((v) => I.upd('reviews', i, 'text', v)), setName: fw((v) => I.upd('reviews', i, 'name', v)), setStars: fw((v) => I.upd('reviews', i, 'stars', Math.max(0, Math.min(5, parseInt(v, 10) || 0)))), attach: async (e) => { const f = e.target.files[0]; if (f) I.upd('reviews', i, 'img', await I.webp(f, 800)); } })),
+      faqRows: s.faqs.map((f, i) => ({ q: f.q, a: f.a, setQ: fw((v) => I.upd('faqs', i, 'q', v)), setA: fw((v) => I.upd('faqs', i, 'a', v)) })),
+      ...(() => { const R = I.getRange(), today = I.kst(0).slice(0, 10); return { rFrom: R.from, rTo: R.to, rToday: today, onFrom: (e) => I.setRange(e.target.value, R.to), onTo: (e) => I.setRange(R.from, e.target.value),
+        rangeBtns: [7, 14, 30].map((d) => { const fr = I.kst(d - 1).slice(0, 10), on = R.from === fr && R.to === today; return { label: '최근 ' + d + '일', click: () => I.setRange(fr, today), style: 'border:0;border-radius:18px;height:36px;padding:0 16px;font-size:12px;font-family:inherit;cursor:pointer;' + (on ? 'background:#4f46c8;color:#fff' : 'background:#fff;color:#4a4977') }; }) }; })(),
+      statsNote: s.statsLoading ? '불러오는 중...' : s.statsNote || '', ...D,
+      leadTabs: [['ALL', '전체'], ['SKT', 'SKT'], ['KT', 'KT'], ['LGU+', 'LG']].map((t) => ({ label: t[1], count: cnt(t[0]), style: 'border:0;border-radius:30px;height:44.6px;padding:0 24px;font-size:17.8px;font-weight:600;' + (s.leadFilter === t[0] ? 'background:#161a3a;color:#fff' : 'background:#eef1f5;color:#333'), click: () => I.setState({ leadFilter: t[0], page: 0 }) })),
+      searchKey: s.searchKey, searchVal: s.searchVal, onSearchKey: fw((v) => I.setState({ searchKey: v })), onSearchVal: fw((v) => I.setState({ searchVal: v, page: 0 })),
+      leadRows: flt.slice(pg * PS, pg * PS + PS).map((l) => ({ date: l.kst, name: l.name, phone: l.phone, carrier: l.carrier, plan: l.plan, model: l.model, internet: l.internet, del: () => { I.removed.leads.push(l.id); I.setState((x) => ({ leads: x.leads.filter((y) => y.id !== l.id) })); } })),
+      pageText: pg + 1 + ' / ' + pages, prevPage: () => I.setState({ page: Math.max(0, pg - 1) }), nextPage: () => I.setState({ page: Math.min(pages - 1, pg + 1) }), downloadXlsx: () => I.xlsx(),
+      connectSheet: () => I.connectSheet(), newId: s.newId, newPw: s.newPw, onNewId: fw((v) => I.setState({ newId: v })), onNewPw: fw((v) => I.setState({ newPw: v })), changeAdmin: () => I.changeAdmin(),
+    };
+  }
+}
+
+</script>
+</body>
+</html>

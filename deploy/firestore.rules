@@ -1,0 +1,14 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /settings/basic { allow read: if true; allow write: if true; }
+    match /{col}/{id} {
+      allow read: if col in ['reviews','faqs','details'];
+      allow create: if col == 'leads';
+      allow write: if col in ['reviews','faqs','details','leads','settings'];
+      allow read: if col in ['leads','settings'];
+    }
+  }
+}
+// 주의: 관리자 로그인이 클라이언트 방식이라 위 규칙은 개발용입니다.
+// 운영 시 Firebase Auth(관리자 계정) 도입 후 write/read(leads, settings)를 request.auth != null 로 제한하세요.
