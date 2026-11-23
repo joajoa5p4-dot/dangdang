@@ -15,6 +15,11 @@
 `META_PIXEL_ID`, `META_CAPI_TOKEN`, (`META_TEST_CODE`), `GA4_PROPERTY_ID`, `GOOGLE_SERVICE_ACCOUNT_JSON`
 - 서비스계정 이메일을 GA4 속성(뷰어) / 구글시트(편집자)에 추가
 
+## 2-1. Firestore 읽기 절감
+- 방문자 화면은 `/api/content`(Vercel CDN 5분 캐시) + 브라우저 5분 캐시로 읽음 → 트래픽과 무관하게 5분당 1회분만 Firestore 읽기
+- 환경변수 `FIREBASE_PROJECT_ID` 추가 필요. 관리자 화면은 항상 최신(직접 읽기)
+- 관리자 수정 반영은 최대 5분 지연
+
 ## 3. Firestore 컬렉션
 `settings/basic`, `settings/admin`, `reviews/*`, `faqs/*`, `details/*`, `leads/*` (항목별 개별 문서)
 

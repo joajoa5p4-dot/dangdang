@@ -313,7 +313,15 @@ class Component extends DCLogic {
   async sha(t) { const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(t)); return [...new Uint8Array(b)].map((x) => x.toString(16).padStart(2, '0')).join(''); }
 
   async load() {
-    const [bs, rv, fq, dt] = await Promise.all([this.getD('settings', 'basic'), this.list('reviews'), this.list('faqs'), this.list('details')]);
+    let bs, rv, fq, dt, ok = false; const adm = this.isAdminRoute();
+    if (!adm && this.fb) {
+      try {
+        let c = null; try { c = JSON.parse(localStorage.getItem('ddp_content_v1')); } catch (e) {}
+        if (!c || Date.now() - c.t > 3e5) { const r = await fetch('/api/content'); if (!r.ok) throw 0; c = { t: Date.now(), d: await r.json() }; localStorage.setItem('ddp_content_v1', JSON.stringify(c)); }
+        ({ basic: bs, reviews: rv, faqs: fq, details: dt } = c.d); ok = true;
+      } catch (e) {}
+    }
+    if (!ok) [bs, rv, fq, dt] = await Promise.all([this.getD('settings', 'basic'), this.list('reviews'), this.list('faqs'), this.list('details')]);
     const d = this.defs(); const basic = Object.assign({}, d, bs || {}, { plans: Object.assign({}, d.plans, (bs || {}).plans), footer: Object.assign({}, d.footer, (bs || {}).footer) });
     const by = (a, b) => (a.order || 0) - (b.order || 0);
     this.setState({ basic, reviews: (rv.length ? rv : this.defReviews()).sort(by), faqs: (fq.length ? fq : this.defFaqs()).sort(by), details: (dt.length ? dt : this.defDetails()).sort(by), loaded: true, demo: !this.fb, sel: Object.assign({}, this.state.sel, { carrier: basic.defaultCarrier || 'SKT' }) });
@@ -331,7 +339,7 @@ class Component extends DCLogic {
   initTracking() {
     if (window.__ddpTrack) return; window.__ddpTrack = true;
     const w = window; w.dataLayer = w.dataLayer || []; w.gtag = w.gtag || function () { w.dataLayer.push(arguments); };
-    const saved = localStorage.getItem('ddp_consent'); this.setState({ consentState: saved });
+    const saved = 'granted'; this.setState({ consentState: saved });
     const g = saved === 'granted' ? 'granted' : 'denied';
     gtag('consent', 'default', { ad_storage: g, analytics_storage: g, ad_user_data: g, ad_personalization: g, wait_for_update: 500 });
     const { GTM_ID, GA4_ID, PIXEL_ID } = this.cfg;
@@ -604,7 +612,7 @@ class Component extends DCLogic {
       submitHero: () => I.submit('hero'), submitModal: () => I.submit('modal'),
       openModal: () => { I.track('cta_click', { label: 'floating' }); I.setState({ modal: true }); }, closeModal: () => I.setState({ modal: false }), stop: (e) => e.stopPropagation(),
       openPre: () => { let u = (b.preLink || '').trim(); if (!u) return; if (!/^https?:\/\//i.test(u)) u = 'https://' + u; window.open(u, '_blank', 'noopener'); },
-      showConsentBar: !s.consentState, consentYes: () => I.setConsent('granted'), consentNo: () => I.setConsent('denied'),
+      showConsentBar: false, consentYes: () => I.setConsent('granted'), consentNo: () => I.setConsent('denied'),
       trackStyle: 'display:flex;gap:15px;padding-left:18px;width:max-content;transition:' + (s.anim ? 'transform .6s ease' : 'none') + ';transform:translateX(' + -s.idx * 205.3 + 'px)',
       revSlides: slides.map((r, i) => Object.assign(rvv(r, i), { imgStyle: r.img ? 'height:111.3px;background:#ddd url("' + r.img + '") center/cover' : 'height:111.3px;background:#e9edf2;display:flex;align-items:center;justify-content:center;color:#9aa3af;font-size:12px', av: 'width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9.4px;font-weight:600;' + (String(r.name).charAt(0) === '민' ? 'background:#ffe9e0;color:#ff3c00' : 'background:#e6efff;color:#0055ff') })),
       tStart: (e) => { I.tx = e.touches[0].clientX; }, tEnd: (e) => { const d = e.changedTouches[0].clientX - I.tx; if (Math.abs(d) < 40) return; I.setState((x) => ({ idx: d < 0 ? x.idx + 1 : Math.max(0, x.idx - 1), anim: true })); },
